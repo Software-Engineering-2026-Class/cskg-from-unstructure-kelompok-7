@@ -9,6 +9,7 @@ OUTPUT_FILE = "cskg_full_dump.ttl"
 
 def dump_ttl():
     print(f"Connecting to {VIRTUOSO_ENDPOINT}...")
+    print(f"Dumping named graph <{GRAPH_URI}> only...")
 
     query = f"CONSTRUCT {{ ?s ?p ?o }} WHERE {{ GRAPH <{GRAPH_URI}> {{ ?s ?p ?o }} }}"
 
@@ -18,7 +19,13 @@ def dump_ttl():
     }
 
     try:
-        response = requests.get(VIRTUOSO_ENDPOINT, params=params, stream=True)
+        response = requests.get(
+            VIRTUOSO_ENDPOINT,
+            params=params,
+            headers={"Accept": "text/turtle"},
+            stream=True,
+            timeout=60,
+        )
         response.raise_for_status()
 
         print(f"Downloading graph to '{OUTPUT_FILE}'...")
@@ -27,7 +34,7 @@ def dump_ttl():
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
 
-        print("Dump complete!")
+        print(f"Dump complete: {OUTPUT_FILE}")
 
     except requests.exceptions.ConnectionError:
         print("Error: Could not connect to Virtuoso. Is Docker running?")

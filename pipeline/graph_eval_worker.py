@@ -8,6 +8,7 @@ from pipeline.graph_eval import generate_brief
 API_URL = "http://api:8000"
 QUERY_ENDPOINT = f"{API_URL}/query"
 STATUS_ENDPOINT = f"{API_URL}/"
+STATS_ENDPOINT = f"{API_URL}/stats"
 REPORTS_DIR = "/app/reports"  # Directory to save the markdown files
 
 
@@ -35,8 +36,8 @@ def check_system_health():
             return False
 
         # 3. Check if we actually have data
-        total_triples = status.get("total_triples", 0)
-        print(f"[SUMMARY] System Healthy. Total Triples: {total_triples}")
+        total_triples = status.get("cskg_named_graph_triples", 0)
+        print(f"[SUMMARY] System Healthy. CSKG Named Graph Triples: {total_triples}")
 
         if total_triples == 0:
             print("[SUMMARY] Graph is empty. Skipping summary generation.")
@@ -84,6 +85,44 @@ def get_high_priority_threats():
         return []
 
 
+def get_graph_fallback_summary_data():
+    """Collects non-actor CSKG data so reports can still be generated."""
+    sparql_query = """
+    PREFIX stix: <http://docs.oasis-open.org/cti/ns/stix#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT ?category ?label
+    WHERE {
+      GRAPH <http://group2.org/cskg> {
+        VALUES (?type ?category) {
+          (stix:Vulnerability "Vulnerability")
+          (stix:Malware "Malware")
+          (stix:AttackPattern "AttackPattern")
+          (stix:Indicator "Indicator")
+        }
+        ?entity a ?type .
+        OPTIONAL { ?entity rdfs:label ?entity_label }
+        BIND(COALESCE(?entity_label, STR(?entity)) AS ?label)
+      }
+    }
+    ORDER BY ?category ?label
+    LIMIT 100
+    """
+    try:
+        data_response = requests.post(QUERY_ENDPOINT, json={"query": sparql_query})
+        data_response.raise_for_status()
+        stats_response = requests.get(STATS_ENDPOINT, timeout=10)
+        stats_response.raise_for_status()
+        return {
+            "summary_mode": "fallback_non_threat_actor",
+            "stats": stats_response.json(),
+            "entities": data_response.json().get("results", []),
+        }
+    except Exception as e:
+        print(f"[SUMMARY] Error querying fallback graph data: {e}")
+        return None
+
+
 def save_report(report_content, date_str):
     """Saves the report to a markdown file."""
     # Ensure directory exists
@@ -111,8 +150,11 @@ if __name__ == "__main__":
     # 2. Get Data
     data = get_high_priority_threats()
     if not data:
-        print("[SUMMARY] No threat actor relationships found to summarize.")
-        sys.exit(0)
+        print("[SUMMARY] No threat actor relationships found. Using fallback graph summary.")
+        data = get_graph_fallback_summary_data()
+        if not data:
+            print("[SUMMARY] No fallback graph data found to summarize.")
+            sys.exit(0)
 
     # 3. Prepare Date
     today_str = datetime.now().strftime("%Y-%m-%d")

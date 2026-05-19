@@ -18,12 +18,12 @@ def generate_brief(data, date_str):
     
     Your task is to write a 'Comprehensive Threat Landscape Assessment' based on the aggregated knowledge in our graph.
     
-    The data below represents the Known Capabilities of various Threat Actors tracked in our system.
+    The data below represents the current knowledge in our CSKG named graph. It may contain threat actor capabilities, or fallback graph data focused on vulnerabilities, malware, attack patterns, and indicators when no threat actors are present.
     
     Please analyze this data to provide a strategic summary:
-    1. **Key Threat Actors:** Which groups have the most diverse toolsets?
-    2. **Tooling Trends:** Are there common tools being used across different actors?
-    3. **Strategic Assessment:** Provide a high-level summary of the threat environment based on this data.
+    1. **Key Observations:** Identify the most important entities and patterns in the data.
+    2. **Risk Themes:** Discuss vulnerabilities, malware, attack patterns, indicators, or threat actors when available.
+    3. **Strategic Assessment:** Provide a high-level summary of the threat environment based on this graph snapshot.
     
     Use a professional, authoritative tone. Do not focus on "today's events"—focus on the "overall state of the threat."
 
