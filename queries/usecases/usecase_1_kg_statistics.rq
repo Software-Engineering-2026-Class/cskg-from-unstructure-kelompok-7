@@ -1,0 +1,24 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?metric ?value
+WHERE {
+  {
+    SELECT ("total_triples" AS ?metric) (COUNT(*) AS ?value)
+    WHERE {
+      GRAPH <http://group2.org/cskg> {
+        ?s ?p ?o .
+      }
+    }
+  }
+  UNION
+  {
+    SELECT (CONCAT("type_count:", STR(?type)) AS ?metric) (COUNT(DISTINCT ?s) AS ?value)
+    WHERE {
+      GRAPH <http://group2.org/cskg> {
+        ?s rdf:type ?type .
+      }
+    }
+    GROUP BY ?type
+  }
+}
+ORDER BY ?metric
