@@ -10,6 +10,8 @@ RSS_FEEDS = {
     "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
     "KrebsOnSecurity": "https://krebsonsecurity.com/feed/",
     "FortiGuardLabs": "https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml",
+    "SANS_ISC": "https://isc.sans.edu/rssfeed_full.xml",
+    "Securelist": "https://securelist.com/feed/",
 }
 MAX_ARTICLES_PER_FEED = 2
 
