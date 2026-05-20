@@ -1,8 +1,8 @@
 # Group Members
-Axelle Chandra (http://github.com/jeelichan)
-Danar Fathurahman (http://github.com/danarfthr)
-Kesya Izumi (https://github.com/kesyazm)
-Keyne Elvaretta (https://github.com/keyneelvrt)
+* Axelle Chandra (https://github.com/jeelichan)
+* Danar Fathurahman (http://github.com/danarfthr)
+* Kesya Izumi (https://github.com/kesyazm)
+* Keyne Elvaretta (https://github.com/keyneelvrt)
 
 # Constructing a Cybersecurity Knowledge Graph from Unstructured Data
 
