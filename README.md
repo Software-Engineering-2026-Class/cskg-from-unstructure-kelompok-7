@@ -1,3 +1,9 @@
+# Group Members
+Axelle Chandra (http://github.com/jeelichan)
+Danar Fathurahman (http://github.com/danarfthr)
+Kesya Izumi (https://github.com/kesyazm)
+Keyne Elvaretta (https://github.com/keyneelvrt)
+
 # Constructing a Cybersecurity Knowledge Graph from Unstructured Data
 
 This repository builds a Cybersecurity Knowledge Graph (CSKG) from unstructured cybersecurity RSS articles. The pipeline scrapes articles, extracts cybersecurity entities and relations with a Gemini/LangChain extractor, maps the extraction to RDF/STIX-style triples, stores the triples in Virtuoso, and exposes the graph through a FastAPI service.
