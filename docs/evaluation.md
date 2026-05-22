@@ -43,26 +43,8 @@ Missing or weak areas:
 - Some extracted relationships point to untyped object nodes, for example target or related concept URIs that do not yet have explicit RDF types.
 - The graph is still small, with 83 triples from 8 reports.
 - The summary report was not written because Gemini quota blocked LLM generation.
-- Runtime hotfix was applied with `docker cp`; the long-term deployment path still needs Docker Compose or proper container recreation from the rebuilt image.
 
 ## Errors and Limitations
-
-### Runtime Deployment Limitation
-
-Docker Compose is not available in the current environment.
-
-Observed behavior:
-
-```text
-docker: 'compose' is not a docker command.
-docker-compose: command not found
-```
-
-Impact:
-
-- `docker compose up --build -d` cannot currently be used.
-- Runtime verification of updated API and summary code required a temporary `docker cp` hotfix into running containers.
-- This proves the code works, but it is not a clean deployment method.
 
 ### Gemini Quota Issue
 
@@ -110,7 +92,7 @@ Impact:
 |---|---|---|---|
 | Multiple unstructured sources | Partially satisfied | RSS source pipeline processed 8 articles | Document all configured sources and add more source coverage if required |
 | RDF knowledge graph | Satisfied for current run | 83 triples in `<http://group2.org/cskg>` | Grow graph with more articles and better typing |
-| Named graph correctness | Satisfied | `GET /` and `/stats` report CSKG named graph metrics | Recreate containers properly instead of hotfix |
+| Named graph correctness | Satisfied | `GET /` and `/stats` report CSKG named graph metrics | Re-run after larger graph builds |
 | SPARQL endpoint | Satisfied | `POST /query` returns named graph count and distributions | Add saved example query outputs if needed |
 | SEPSES CVE linking | Partially satisfied | `/stats` reports `total_sepses_cve_uri = 1` | Add more CVE-containing sources and validate links |
 | Summary/statistics | Partially satisfied | `/stats` works; fallback starts | Gemini quota blocks report generation |
@@ -121,9 +103,8 @@ Impact:
 
 Recommended next steps:
 
-1. Install Docker Compose plugin or recreate containers cleanly from the rebuilt `cskg_app` image so runtime matches repository code without `docker cp`.
-2. Resolve Gemini quota by using a valid project/key with available quota, waiting for quota reset, or switching to an approved model only after confirming assignment constraints.
-3. Add or prioritize sources likely to mention threat actors, such as CISA advisories, vendor threat reports, Mandiant, CrowdStrike, or curated threat intel blogs.
-4. Improve extraction validation so relationship subjects and objects that appear as actor-like or malware-like entities are also typed when appropriate.
-5. Re-run the pipeline on a larger article batch and regenerate `cskg_full_dump.ttl`.
-6. Save example SPARQL query outputs for the three real-world use-cases under `docs/evidence/` after the graph grows.
+1. Resolve Gemini quota by using a valid project/key with available quota, waiting for quota reset, or switching to an approved model only after confirming assignment constraints.
+2. Add or prioritize sources likely to mention threat actors, such as CISA advisories, vendor threat reports, Mandiant, CrowdStrike, or curated threat intel blogs.
+3. Improve extraction validation so relationship subjects and objects that appear as actor-like or malware-like entities are also typed when appropriate.
+4. Re-run the pipeline on a larger article batch and regenerate `cskg_full_dump.ttl`.
+5. Save example SPARQL query outputs for the three real-world use-cases under `docs/evidence/` after the graph grows.
