@@ -16,6 +16,10 @@ This use-case answers:
 - What entity types are present?
 - Which entity categories are missing or underrepresented?
 
+### Why the KG Helps
+
+The knowledge graph stores entities and relationships from multiple unstructured cybersecurity sources in one queryable RDF graph. This makes it possible to measure graph coverage with one named-graph query instead of manually checking each source article or pipeline log.
+
 ### Query
 
 ```sparql
@@ -45,16 +49,25 @@ WHERE {
 ORDER BY ?metric
 ```
 
-### Expected Output
+### Expected Output and Current Runtime Result
 
 Expected output is a table of metrics such as:
 
 | metric | value |
 |---|---:|
-| `total_triples` | 83 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 9 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 8 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 5 |
+| `total_triples` | 676 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 67 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 61 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor` | 32 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 19 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Malware` | 17 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator` | 10 |
+
+Runtime validation on 2026-05-26 returned 7 rows from the named graph. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+
+### Current Limitation
+
+This use-case reports graph coverage only. It does not by itself prove extraction accuracy, entity normalization quality, or completeness of the source collection.
 
 ### Real-World Benefit
 
@@ -72,6 +85,10 @@ This use-case answers:
 
 - Which vulnerabilities are linked to external SEPSES CVE resources?
 - Which reports mention those CVEs?
+
+### Why the KG Helps
+
+The graph maps CVE-like vulnerability mentions to stable SEPSES CVE URIs. Analysts can use those URIs to connect extracted report evidence with external vulnerability knowledge, instead of treating CVE strings as isolated text mentions.
 
 ### Query
 
@@ -95,15 +112,21 @@ WHERE {
 ORDER BY ?cve ?report
 ```
 
-### Expected Output
+### Expected Output and Current Runtime Result
 
-Expected output is a list of SEPSES-linked CVE entities, labels, and source reports. In the current run, `/stats` reports `total_sepses_cve_uri = 1`.
+Expected output is a list of SEPSES-linked CVE entities, labels, and source reports.
 
 Example expected row shape:
 
 | cve | label | report |
 |---|---|---|
 | `https://w3id.org/sepses/resource/cve/CVE-2025-52691` | `CVE-2025-52691` | FortiGuard SmarterMail RCE report URI |
+
+Runtime validation on 2026-05-26 returned 9 rows and 8 unique SEPSES-linked CVE URIs from the named graph. The current result includes CVEs such as `CVE-2025-34291`, `CVE-2025-52691`, `CVE-2026-20223`, and `CVE-2026-9082`. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+
+### Current Limitation
+
+This use-case validates URI mapping for extracted CVEs. It does not yet enrich the CVEs with external SEPSES attributes such as severity, affected products, or remediation metadata.
 
 ### Real-World Benefit
 
@@ -122,6 +145,10 @@ This use-case answers:
 - What malware or attack patterns were extracted?
 - Which reports mention them?
 - What relationships were extracted around those entities?
+
+### Why the KG Helps
+
+The graph links malware and attack-pattern entities to reports and extracted relationships. Analysts can pivot from a technique or malware label to source reports and related concepts without reading every article manually.
 
 ### Query
 
@@ -156,15 +183,21 @@ WHERE {
 ORDER BY ?entity_type ?label ?relationship
 ```
 
-### Expected Output
+### Expected Output and Current Runtime Result
 
-Expected output includes current entities such as `Trapdoor`, `ad fraud`, `malvertising`, `DirtyDecrypt`, `Remote Code Execution`, and their associated report URLs where available.
+Expected output includes attack pattern or malware entities, their RDF type, labels, relationships, related entities, and associated report URLs where available.
 
 Example expected row shape:
 
 | entity | entity_type | label | relationship | related_entity | report |
 |---|---|---|---|---|---|
-| `cskg:trapdoor` | `stix:Malware` | `Trapdoor` | `stix:targets` | `cskg:androiddeviceusers` | TheHackerNews Trapdoor report URI |
+| `cskg:supplychainattack` | `stix:AttackPattern` | `Supply chain attack` | `stix:targets` | `cskg:packagist` | Packagist supply-chain report URI |
+
+Runtime validation on 2026-05-26 returned 161 rows from the named graph, covering 67 attack pattern entities, 17 malware entities, and 78 rows with relationship context. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+
+### Current Limitation
+
+Some related entities are currently untyped or do not have `rdfs:label`, so Use Case 3 may show related URI values without readable labels. Repeated entities are expected when the same attack pattern or malware appears in multiple source reports.
 
 ### Real-World Benefit
 
