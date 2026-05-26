@@ -3,17 +3,25 @@ from bs4 import BeautifulSoup
 import redis
 import json
 import time
+import requests
 
 # --- Configuration ---
 RSS_FEEDS = {
+    # News
     "TheHackerNews": "http://feeds.feedburner.com/TheHackersNews",
     "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
     "KrebsOnSecurity": "https://krebsonsecurity.com/feed/",
-    "FortiGuardLabs": "https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml",
-    "SANS_ISC": "https://isc.sans.edu/rssfeed_full.xml",
+    # Threat Research
     "Securelist": "https://securelist.com/feed/",
+    "CheckPointResearch": "https://research.checkpoint.com/category/threat-research/feed/",
+    # Threat Monitoring
+    "SANS_ISC": "https://isc.sans.edu/rssfeed_full.xml",
+    # Vendor Intelligence
+    "FortiGuardLabs": "https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml",
+
 }
 MAX_ARTICLES_PER_FEED = 2
+MAX_NVD_ARTICLES = 5
 
 # Redis connection details
 # We use 'redis' as the host name because it's the service name in docker-compose
@@ -46,6 +54,29 @@ def fetch_articles(feed_url, max_articles=5):
         )
     return articles
 
+def fetch_nvd_cves(max_articles=5):
+    """Fetches recent CVEs from the NVD REST API v2."""
+    print("Fetching articles from: NVD API (NIST)")
+    url = "https://services.nvd.nist.gov/rest/json/cves/2.0"
+    articles = []
+    try:
+        response = requests.get(url, params={"resultsPerPage": max_articles}, timeout=15)
+        for item in response.json().get("vulnerabilities", []):
+            cve = item.get("cve", {})
+            cve_id = cve.get("id", "Unknown CVE")
+            descriptions = cve.get("descriptions", [])
+            description = next((d["value"] for d in descriptions if d.get("lang") == "en"), "N/A")
+            articles.append(
+                {
+                    "title": cve_id,
+                    "link": f"https://nvd.nist.gov/vuln/detail/{cve_id}",
+                    "published": cve.get("published", "N/A"),
+                    "content": f"Vulnerability: {cve_id}. Description: {description}",
+                }
+            )
+    except Exception as e:
+        print(f"NVD fetch failed: {e}")
+    return articles
 
 def connect_to_redis():
     """Connects to Redis with retries."""
@@ -66,6 +97,7 @@ def run_producer():
     all_articles = []
     for _, url in RSS_FEEDS.items():
         all_articles.extend(fetch_articles(url, MAX_ARTICLES_PER_FEED))
+    all_articles.extend(fetch_nvd_cves(MAX_NVD_ARTICLES))
 
     new_articles_pushed = 0
     for article in all_articles:
