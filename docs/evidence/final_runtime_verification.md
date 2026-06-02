@@ -12,7 +12,7 @@ Observed result:
 - graph_db_backend: Virtuoso
 - named_graph: `http://group2.org/cskg`
 - global_triples: 6423
-- cskg_named_graph_triples: 676
+- cskg_named_graph_triples: 963
 
 ## KG Statistics
 
@@ -20,23 +20,23 @@ Endpoint:
 `GET http://localhost:8000/stats`
 
 Observed result:
-- total triples: 676
-- reports: 61
-- vulnerabilities: 19
-- malware: 17
-- indicators: 10
-- attack patterns: 67
-- threat actors: 32
-- SEPSES CVE URIs: 8
+- total triples: 963
+- reports: 89
+- vulnerabilities: 27
+- malware: 24
+- indicators: 11
+- attack patterns: 81
+- threat actors: 58
+- SEPSES CVE URIs: 11
 
 ## Evaluation Summary
 
-The final graph is significantly larger than the earlier runtime verification. The CSKG named graph now contains 676 triples, 61 reports, 32 threat actors, and 8 SEPSES-linked CVE URIs.
+The final graph is significantly larger than the earlier runtime verification. The CSKG named graph now contains 963 triples, 89 reports, 58 threat actors, and 11 SEPSES-linked CVE URIs.
 
 ## Known Limitations
 
 - The graph is still limited to the collected RSS/API batch.
-- SEPSES linking is strongest for CVE URI mapping.
+- SEPSES linking is strongest for CVE URI mapping, with 11 SEPSES CVE URIs in the latest graph.
 - CWE and MITRE ATT&CK URI alignment are not fully implemented yet.
 - Automatic natural-language report generation may still be affected by Gemini quota limits.
 - Extraction quality depends on the source article summaries and Gemini output consistency.

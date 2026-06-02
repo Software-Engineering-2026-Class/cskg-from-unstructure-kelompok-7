@@ -127,7 +127,7 @@ FastAPI runs from `server/api_server.py`.
 | `GET` | `/stats` | CSKG named graph statistics by type and predicate |
 | `POST` | `/query` | Execute a raw SPARQL SELECT query against Virtuoso |
 
-Example `GET /` response from runtime verification:
+Example `GET /` response from final runtime verification:
 
 ```json
 {
@@ -135,31 +135,32 @@ Example `GET /` response from runtime verification:
   "graph_db_backend": "Virtuoso",
   "sparql_endpoint": "http://virtuoso:8890/sparql",
   "named_graph": "http://group2.org/cskg",
-  "global_triples": 5830,
-  "cskg_named_graph_triples": 83
+  "global_triples": 6423,
+  "cskg_named_graph_triples": 963
 }
 ```
 
-Example `GET /stats` response from runtime verification:
+Example `GET /stats` response from final runtime verification:
 
 ```json
 {
   "named_graph": "http://group2.org/cskg",
-  "total_triples": 83,
+  "total_triples": 963,
   "count_by_type": {
-    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 9,
-    "http://docs.oasis-open.org/cti/ns/stix#Report": 8,
-    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 5,
-    "http://docs.oasis-open.org/cti/ns/stix#Indicator": 2,
-    "http://docs.oasis-open.org/cti/ns/stix#Malware": 1
+    "http://docs.oasis-open.org/cti/ns/stix#Report": 89,
+    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 81,
+    "http://docs.oasis-open.org/cti/ns/stix#ThreatActor": 58,
+    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 27,
+    "http://docs.oasis-open.org/cti/ns/stix#Malware": 24,
+    "http://docs.oasis-open.org/cti/ns/stix#Indicator": 11
   },
-  "total_reports": 8,
-  "total_vulnerabilities": 5,
-  "total_malware": 1,
-  "total_indicators": 2,
-  "total_attack_patterns": 9,
-  "total_threat_actors": 0,
-  "total_sepses_cve_uri": 1
+  "total_reports": 89,
+  "total_vulnerabilities": 27,
+  "total_malware": 24,
+  "total_indicators": 11,
+  "total_attack_patterns": 81,
+  "total_threat_actors": 58,
+  "total_sepses_cve_uri": 11
 }
 ```
 
@@ -256,34 +257,32 @@ GRAPH <http://group2.org/cskg>
 
 It does not intentionally dump Virtuoso internal graphs.
 
-## Runtime Verification Snapshot
+## Final Runtime Verification Snapshot
 
-The latest documented runtime verification is stored in `docs/evidence/runtime_verification.md`.
+The latest documented runtime verification is stored in `docs/evidence/final_runtime_verification.md`. Earlier 83-triple evidence is retained as historical evidence in `docs/evidence/runtime_verification.md`.
 
-Observed state from that run:
+Observed final state:
 
 | Metric | Value |
 |---|---:|
-| CSKG named graph triples | 83 |
-| Reports | 8 |
-| Vulnerabilities | 5 |
-| Malware | 1 |
-| Indicators | 2 |
-| Attack patterns | 9 |
-| Threat actors | 0 |
-| SEPSES CVE URIs | 1 |
+| CSKG named graph triples | 963 |
+| Reports | 89 |
+| Vulnerabilities | 27 |
+| Malware | 24 |
+| Indicators | 11 |
+| Attack patterns | 81 |
+| Threat actors | 58 |
+| SEPSES CVE URIs | 11 |
 
-The file `cskg_full_dump.ttl` was regenerated from the live named graph after this run.
+The final runtime evidence uses only the CSKG named graph `<http://group2.org/cskg>` for graph-size and entity-count reporting.
 
 ## Known Limitations
 
-- Runtime verification produced 83 triples in `<http://group2.org/cskg>`.
-- `stix:ThreatActor = 0` for the verified run, so threat-actor-specific summaries and actor profiling are not demonstrated by that batch.
-- Summary fallback was triggered using vulnerability, malware, attack pattern, indicator, and `/stats` data.
-- Report generation did not complete because Gemini returned `429 RESOURCE_EXHAUSTED` quota errors for `gemini-2.0-flash-lite`.
-- No new report is claimed for the verified run because the LLM quota blocked report generation.
-- Docker Compose was not available in the verification environment: `docker compose` and `docker-compose` were unavailable.
-- Because Compose was unavailable during verification, runtime testing of updated API/summary code used a temporary `docker cp` hotfix into running containers. A proper deployment should use Docker Compose or clean container recreation from the rebuilt image.
+- The graph is limited to the collected RSS/API batch.
+- SEPSES linking is strongest for CVE URI mapping; the latest graph has 11 SEPSES CVE URIs.
+- CWE and MITRE ATT&CK URI alignment are not fully implemented yet.
+- Automatic natural-language report generation may still be affected by Gemini quota limits.
+- Docker Compose was not detected during earlier verification, but it is available now and the project can be run cleanly with `docker compose -f compose.yml up --build -d`.
 
 ## How to Run
 
@@ -293,7 +292,7 @@ The file `cskg_full_dump.ttl` was regenerated from the live named graph after th
    GOOGLE_API_KEY=YOUR_API_KEY_HERE
    ```
 
-2. Build and run with Docker Compose, if the Compose plugin is installed:
+2. Build and run with Docker Compose:
 
    ```bash
    docker compose -f compose.yml up --build -d
@@ -315,7 +314,7 @@ The file `cskg_full_dump.ttl` was regenerated from the live named graph after th
    Redis: redis://localhost:6379
    ```
 
-4. View logs when Docker Compose is available:
+4. View logs:
 
    ```bash
    docker compose -f compose.yml logs -f
@@ -324,7 +323,8 @@ The file `cskg_full_dump.ttl` was regenerated from the live named graph after th
 
 ## Supporting Documentation
 
-- Runtime evidence: `docs/evidence/runtime_verification.md`
+- Final runtime evidence: `docs/evidence/final_runtime_verification.md`
+- Historical runtime evidence: `docs/evidence/runtime_verification.md`
 - Evaluation and limitations: `docs/evaluation.md`
 - Use-case descriptions: `docs/usecases.md`
 - SPARQL use-case queries: `queries/usecases/`

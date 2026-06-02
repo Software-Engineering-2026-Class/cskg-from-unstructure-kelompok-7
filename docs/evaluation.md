@@ -10,27 +10,27 @@ Successful components:
 
 - The producer collected articles from the configured RSS/API sources.
 - The extractor processed queued articles and produced cybersecurity entity/relation extractions.
-- The graph builder inserted 676 triples into the named graph `<http://group2.org/cskg>`.
+- The graph builder inserted 963 triples into the named graph `<http://group2.org/cskg>`.
 - Redis queues are draining correctly for the processed batch; `extractions_queue` is empty after graph insertion.
 - Virtuoso is reachable at the configured SPARQL endpoint.
 - FastAPI can query Virtuoso through `POST /query`.
 - `GET /` now distinguishes global Virtuoso triples from CSKG named graph triples.
 - `GET /stats` now reports named graph statistics.
-- SEPSES CVE URI linking is present for 8 CVE resources.
-- Threat actor extraction improved from 0 entities in the earlier runtime snapshot to 32 entities in the final verified graph.
+- SEPSES CVE URI linking is present for 11 CVE resources.
+- Threat actor extraction improved from 0 entities in the earlier runtime snapshot to 58 entities in the final verified graph.
 
 Final graph summary:
 
 | Metric | Value |
 |---|---:|
-| Total CSKG named graph triples | 676 |
-| Reports | 61 |
-| Vulnerabilities | 19 |
-| Malware | 17 |
-| Indicators | 10 |
-| Attack patterns | 67 |
-| Threat actors | 32 |
-| SEPSES CVE URIs | 8 |
+| Total CSKG named graph triples | 963 |
+| Reports | 89 |
+| Vulnerabilities | 27 |
+| Malware | 24 |
+| Indicators | 11 |
+| Attack patterns | 81 |
+| Threat actors | 58 |
+| SEPSES CVE URIs | 11 |
 
 ## What Is Still Missing
 
@@ -40,7 +40,7 @@ Missing or weak areas:
 
 - Some extracted relationships point to untyped object nodes, for example target or related concept URIs that do not yet have explicit RDF types.
 - The graph is still limited to the collected RSS/API batch.
-- SEPSES linking is currently strongest for CVE URI mapping; CWE and MITRE ATT&CK URI alignment remain future work.
+- SEPSES linking is currently strongest for CVE URI mapping, with 11 SEPSES CVE URIs in the latest graph; CWE and MITRE ATT&CK URI alignment remain future work.
 - Automatic natural-language report generation may still be affected by Gemini quota limits.
 - Extraction quality depends on source article summaries and Gemini output consistency.
 
@@ -77,7 +77,7 @@ ThreatActor = 0
 The final verified graph improved this to:
 
 ```text
-ThreatActor = 32
+ThreatActor = 58
 ```
 
 Possible causes that need further checking:
@@ -100,22 +100,22 @@ Exact precision/recall is not calculated because no manually labeled gold-standa
 
 | Requirement | Current Status | Evidence | Remaining Work |
 |---|---|---|---|
-| Multiple unstructured sources | Partially satisfied | RSS/API source pipeline produced 61 reports | Continue expanding source coverage |
-| RDF knowledge graph | Satisfied for final run | 676 triples in `<http://group2.org/cskg>` | Improve typing and external alignment |
+| Multiple unstructured sources | Partially satisfied | RSS/API source pipeline produced 89 reports | Continue expanding source coverage |
+| RDF knowledge graph | Satisfied for final run | 963 triples in `<http://group2.org/cskg>` | Improve typing and external alignment |
 | Named graph correctness | Satisfied | `GET /` and `/stats` report CSKG named graph metrics | Continue using named graph queries only |
 | SPARQL endpoint | Satisfied | `POST /query` returns named graph counts and use-case results | Keep saved runtime evidence updated |
-| SEPSES CVE linking | Partially satisfied | `/stats` reports `total_sepses_cve_uri = 8` | Extend linking beyond CVE where appropriate |
+| SEPSES CVE linking | Partially satisfied | `/stats` reports `total_sepses_cve_uri = 11` | Extend linking beyond CVE where appropriate |
 | Summary/statistics | Satisfied for KG statistics | `/stats` works and final evidence is documented | Natural-language reports still depend on Gemini quota |
-| Threat actor analysis | Partially satisfied | `total_threat_actors = 32` | Validate actor relation quality and coverage |
+| Threat actor analysis | Partially satisfied | `total_threat_actors = 58` | Validate actor relation quality and coverage |
 | TTL dump | Satisfied when regenerated | `server/cskg_dump.py` exports the named graph | Re-dump after every major graph build |
 
 ## Final Requirement Evaluation
 
 | Requirement | Final Status | Evidence |
 |---|---|---|
-| Triple count | Completed | 676 named graph triples |
+| Triple count | Completed | 963 named graph triples |
 | Entity counts per class | Completed | `/stats` endpoint |
-| SEPSES linking rate | Partially completed | 8 SEPSES CVE URIs |
+| SEPSES linking rate | Partially completed | 11 SEPSES CVE URIs |
 | Extraction precision/recall estimate | Qualitative / partial | Manual inspection and limitation notes |
 | Known gaps/errors | Completed | Evaluation limitations section |
 
