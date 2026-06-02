@@ -1,56 +1,56 @@
 # CSKG Evaluation
 
-This document evaluates the current state of the Cybersecurity Knowledge Graph pipeline and generated graph.
+This document evaluates the final runtime state of the Cybersecurity Knowledge Graph pipeline and generated graph.
 
 ## What Works
 
-The current pipeline is functional end-to-end for the latest run.
+The current pipeline is functional end-to-end for the final verified run.
 
 Successful components:
 
-- RSS producer collected 8 articles from configured cybersecurity sources.
-- Extractor processed the 8 queued articles.
-- Graph builder inserted 83 triples into the named graph `<http://group2.org/cskg>`.
+- The producer collected articles from the configured RSS/API sources.
+- The extractor processed queued articles and produced cybersecurity entity/relation extractions.
+- The graph builder inserted 676 triples into the named graph `<http://group2.org/cskg>`.
 - Redis queues are draining correctly for the processed batch; `extractions_queue` is empty after graph insertion.
 - Virtuoso is reachable at the configured SPARQL endpoint.
 - FastAPI can query Virtuoso through `POST /query`.
 - `GET /` now distinguishes global Virtuoso triples from CSKG named graph triples.
 - `GET /stats` now reports named graph statistics.
-- `cskg_full_dump.ttl` has been regenerated from the live CSKG named graph.
-- SEPSES CVE URI linking is present for at least one CVE resource.
+- SEPSES CVE URI linking is present for 8 CVE resources.
+- Threat actor extraction improved from 0 entities in the earlier runtime snapshot to 32 entities in the final verified graph.
 
-Current graph summary:
+Final graph summary:
 
 | Metric | Value |
 |---|---:|
-| Total CSKG named graph triples | 83 |
-| Reports | 8 |
-| Vulnerabilities | 5 |
-| Malware | 1 |
-| Indicators | 2 |
-| Attack patterns | 9 |
-| Threat actors | 0 |
-| SEPSES CVE URIs | 1 |
+| Total CSKG named graph triples | 676 |
+| Reports | 61 |
+| Vulnerabilities | 19 |
+| Malware | 17 |
+| Indicators | 10 |
+| Attack patterns | 67 |
+| Threat actors | 32 |
+| SEPSES CVE URIs | 8 |
 
 ## What Is Still Missing
 
-The current run does not yet cover all desired knowledge graph quality goals.
+The final run covers the main runtime requirements, but it does not yet cover all desired knowledge graph quality goals.
 
 Missing or weak areas:
 
-- No `stix:ThreatActor` entities were extracted in this run.
-- No threat actor relationship summary could be generated from actor-tool relations.
 - Some extracted relationships point to untyped object nodes, for example target or related concept URIs that do not yet have explicit RDF types.
-- The graph is still small, with 83 triples from 8 reports.
-- The summary report was not written because Gemini quota blocked LLM generation.
+- The graph is still limited to the collected RSS/API batch.
+- SEPSES linking is currently strongest for CVE URI mapping; CWE and MITRE ATT&CK URI alignment remain future work.
+- Automatic natural-language report generation may still be affected by Gemini quota limits.
+- Extraction quality depends on source article summaries and Gemini output consistency.
 
 ## Errors and Limitations
 
-### Gemini Quota Issue
+### Gemini Quota Risk
 
-The summary fallback path was triggered, but report generation failed due to Gemini quota exhaustion.
+Automatic report generation depends on Gemini availability and quota.
 
-Observed behavior:
+Earlier runtime behavior showed quota exhaustion:
 
 ```text
 [SUMMARY] System Healthy. CSKG Named Graph Triples: 83
@@ -62,16 +62,22 @@ Quota exceeded for model: gemini-2.0-flash-lite
 
 Impact:
 
-- The graph statistics and fallback summary input are available.
-- The Markdown report cannot be generated until Gemini quota or API configuration is resolved.
+- Graph statistics, SPARQL queries, and `/stats` output remain available even if Gemini quota is exhausted.
+- Natural-language report generation can be blocked until Gemini quota or API configuration is resolved.
 - This is an external LLM availability issue, not an RDF/Virtuoso/API issue.
 
-### ThreatActor Missing in This Run
+### Historical ThreatActor Gap
 
-The latest 8-article run produced:
+An earlier 8-article runtime snapshot produced:
 
 ```text
 ThreatActor = 0
+```
+
+The final verified graph improved this to:
+
+```text
+ThreatActor = 32
 ```
 
 Possible causes that need further checking:
@@ -83,28 +89,42 @@ Possible causes that need further checking:
 
 Impact:
 
-- Threat actor profiling use-cases cannot be demonstrated from this run.
-- Summary had to fallback to vulnerabilities, malware, attack patterns, indicators, and graph stats.
+- Threat actor coverage is now present in the final graph, but extraction quality still depends on source content and model consistency.
+- Further validation is needed to measure whether each extracted actor is correctly typed and linked.
+
+### Precision and Recall Estimate
+
+Exact precision/recall is not calculated because no manually labeled gold-standard dataset was created. Instead, this project provides a qualitative evaluation based on runtime outputs, entity distribution, query results, and known extraction gaps.
 
 ## Evaluation of Current Requirements
 
 | Requirement | Current Status | Evidence | Remaining Work |
 |---|---|---|---|
-| Multiple unstructured sources | Partially satisfied | RSS source pipeline processed 8 articles | Document all configured sources and add more source coverage if required |
-| RDF knowledge graph | Satisfied for current run | 83 triples in `<http://group2.org/cskg>` | Grow graph with more articles and better typing |
-| Named graph correctness | Satisfied | `GET /` and `/stats` report CSKG named graph metrics | Re-run after larger graph builds |
-| SPARQL endpoint | Satisfied | `POST /query` returns named graph count and distributions | Add saved example query outputs if needed |
-| SEPSES CVE linking | Partially satisfied | `/stats` reports `total_sepses_cve_uri = 1` | Add more CVE-containing sources and validate links |
-| Summary/statistics | Partially satisfied | `/stats` works; fallback starts | Gemini quota blocks report generation |
-| Threat actor analysis | Missing in this run | `total_threat_actors = 0` | Improve data/source/prompt coverage for actor extraction |
-| TTL dump | Satisfied | `cskg_full_dump.ttl` regenerated from named graph | Re-dump after every major graph build |
+| Multiple unstructured sources | Partially satisfied | RSS/API source pipeline produced 61 reports | Continue expanding source coverage |
+| RDF knowledge graph | Satisfied for final run | 676 triples in `<http://group2.org/cskg>` | Improve typing and external alignment |
+| Named graph correctness | Satisfied | `GET /` and `/stats` report CSKG named graph metrics | Continue using named graph queries only |
+| SPARQL endpoint | Satisfied | `POST /query` returns named graph counts and use-case results | Keep saved runtime evidence updated |
+| SEPSES CVE linking | Partially satisfied | `/stats` reports `total_sepses_cve_uri = 8` | Extend linking beyond CVE where appropriate |
+| Summary/statistics | Satisfied for KG statistics | `/stats` works and final evidence is documented | Natural-language reports still depend on Gemini quota |
+| Threat actor analysis | Partially satisfied | `total_threat_actors = 32` | Validate actor relation quality and coverage |
+| TTL dump | Satisfied when regenerated | `server/cskg_dump.py` exports the named graph | Re-dump after every major graph build |
+
+## Final Requirement Evaluation
+
+| Requirement | Final Status | Evidence |
+|---|---|---|
+| Triple count | Completed | 676 named graph triples |
+| Entity counts per class | Completed | `/stats` endpoint |
+| SEPSES linking rate | Partially completed | 8 SEPSES CVE URIs |
+| Extraction precision/recall estimate | Qualitative / partial | Manual inspection and limitation notes |
+| Known gaps/errors | Completed | Evaluation limitations section |
 
 ## Improvement Plan
 
 Recommended next steps:
 
-1. Resolve Gemini quota by using a valid project/key with available quota, waiting for quota reset, or switching to an approved model only after confirming assignment constraints.
-2. Add or prioritize sources likely to mention threat actors, such as CISA advisories, vendor threat reports, Mandiant, CrowdStrike, or curated threat intel blogs.
+1. Resolve or monitor Gemini quota for automatic natural-language report generation.
+2. Add or prioritize sources likely to mention richer threat actor, malware, vulnerability, and campaign context.
 3. Improve extraction validation so relationship subjects and objects that appear as actor-like or malware-like entities are also typed when appropriate.
-4. Re-run the pipeline on a larger article batch and regenerate `cskg_full_dump.ttl`.
-5. Save example SPARQL query outputs for the three real-world use-cases under `docs/evidence/` after the graph grows.
+4. Extend external URI alignment beyond SEPSES CVE mapping, especially CWE and MITRE ATT&CK where applicable.
+5. Re-run the pipeline on larger batches and regenerate `cskg_full_dump.ttl` after every major graph build.
