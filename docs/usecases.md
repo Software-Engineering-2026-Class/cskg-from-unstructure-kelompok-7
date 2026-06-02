@@ -55,15 +55,15 @@ Expected output is a table of metrics such as:
 
 | metric | value |
 |---|---:|
-| `total_triples` | 676 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 67 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 61 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor` | 32 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 19 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Malware` | 17 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator` | 10 |
+| `total_triples` | 1009 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 85 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 94 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor` | 60 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 30 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Malware` | 25 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator` | 11 |
 
-Runtime validation on 2026-05-26 returned 7 rows from the named graph. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+Final runtime validation on 2026-06-02 returned 7 rows from the named graph. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
 ### Current Limitation
 
@@ -122,7 +122,7 @@ Example expected row shape:
 |---|---|---|
 | `https://w3id.org/sepses/resource/cve/CVE-2025-52691` | `CVE-2025-52691` | FortiGuard SmarterMail RCE report URI |
 
-Runtime validation on 2026-05-26 returned 9 rows and 8 unique SEPSES-linked CVE URIs from the named graph. The current result includes CVEs such as `CVE-2025-34291`, `CVE-2025-52691`, `CVE-2026-20223`, and `CVE-2026-9082`. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+Final runtime validation on 2026-06-02 returned 13 rows and 11 unique SEPSES-linked CVE URIs from the named graph. The current result includes CVEs such as `CVE-2025-34291`, `CVE-2025-52691`, `CVE-2026-0257`, `CVE-2026-20223`, and `CVE-2026-9082`. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
 ### Current Limitation
 
@@ -193,7 +193,7 @@ Example expected row shape:
 |---|---|---|---|---|---|
 | `cskg:supplychainattack` | `stix:AttackPattern` | `Supply chain attack` | `stix:targets` | `cskg:packagist` | Packagist supply-chain report URI |
 
-Runtime validation on 2026-05-26 returned 161 rows from the named graph, covering 67 attack pattern entities, 17 malware entities, and 78 rows with relationship context. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+Final runtime validation on 2026-06-02 returned 241 rows from the named graph, covering 85 attack pattern entities, 25 malware entities, and relationship/report context where available. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
 ### Current Limitation
 

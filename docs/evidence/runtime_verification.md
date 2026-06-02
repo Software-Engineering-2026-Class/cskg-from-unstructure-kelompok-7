@@ -2,6 +2,8 @@
 
 Verification date: 2026-05-20
 
+Historical notice: this file records the initial 83-triple runtime verification only. It is retained for progress history and should not be treated as the latest project result. The latest final runtime evidence is documented in `docs/evidence/final_runtime_verification.md`.
+
 ## Pipeline Status
 
 The CSKG pipeline has successfully processed the current batch end-to-end:

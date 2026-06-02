@@ -1,6 +1,6 @@
 # Use Case Runtime Outputs
 
-Verification date: 2026-05-26  
+Verification date: 2026-06-02  
 Named graph: `<http://group2.org/cskg>`
 
 All queries were executed through the local FastAPI endpoint `POST http://localhost:8000/query` and explicitly scoped to the CSKG named graph with `GRAPH <http://group2.org/cskg>`.
@@ -16,13 +16,13 @@ Query file:
 Runtime result:
 - Rows returned: 7
 - Key findings:
-  - total triples: 676
-  - reports: 61
-  - threat actors: 32
-  - vulnerabilities: 19
-  - malware: 17
-  - indicators: 10
-  - attack patterns: 67
+  - total triples: 1009
+  - reports: 94
+  - threat actors: 60
+  - vulnerabilities: 30
+  - malware: 25
+  - indicators: 11
+  - attack patterns: 85
 
 Sample output:
 
@@ -32,31 +32,31 @@ Sample output:
   "results": [
     {
       "metric": "total_triples",
-      "value": "676"
+      "value": "1009"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern",
-      "value": "67"
+      "value": "85"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator",
-      "value": "10"
+      "value": "11"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Malware",
-      "value": "17"
+      "value": "25"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Report",
-      "value": "61"
+      "value": "94"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor",
-      "value": "32"
+      "value": "60"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability",
-      "value": "19"
+      "value": "30"
     }
   ]
 }
@@ -71,17 +71,20 @@ Query file:
 `queries/usecases/usecase_2_vulnerability_sepses_linking.rq`
 
 Runtime result:
-- Rows returned: 9
+- Rows returned: 13
 - Key findings:
-  - SEPSES-linked CVE result rows: 9
-  - Unique SEPSES-linked CVE URIs: 8
-  - `CVE-2026-9082` appears in two separate source reports.
+  - SEPSES-linked CVE result rows: 13
+  - Unique SEPSES-linked CVE URIs: 11
+  - `CVE-2026-0257` and `CVE-2026-9082` appear in multiple source reports.
 
 SEPSES-linked CVE URI(s):
 - `https://w3id.org/sepses/resource/cve/CVE-2025-34291`
 - `https://w3id.org/sepses/resource/cve/CVE-2025-52691`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-0257`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-20223`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-26980`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-30844`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-31260`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-41091`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-46333`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-48172`
@@ -102,6 +105,11 @@ Sample output:
       "cve": "https://w3id.org/sepses/resource/cve/CVE-2025-52691",
       "label": "CVE-2025-52691",
       "report": "https://fortiguard.fortinet.com/outbreak-alert/smartertools-smartermail-rce"
+    },
+    {
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-0257",
+      "label": "CVE-2026-0257",
+      "report": "https://thehackernews.com/2026/05/pan-os-globalprotect-authentication.html"
     },
     {
       "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-20223",
@@ -131,12 +139,11 @@ Query file:
 `queries/usecases/usecase_3_attack_pattern_malware_context.rq`
 
 Runtime result:
-- Rows returned: 161
+- Rows returned: 241
 - Key findings:
-  - attack pattern entities found: 67
-  - malware entities found: 17
-  - rows with relationship context: 78
-  - examples include `Scams`, `Supply chain attack`, and related entities such as `cryptocurrencykiosks` and `packagist`.
+  - attack pattern entities found: 85
+  - malware entities found: 25
+  - examples include `AI-generated lures`, `Supply chain attack`, and related entities such as `cryptocurrencykiosks` and `packagist`.
 
 Sample output:
 
@@ -153,13 +160,13 @@ Sample output:
   ],
   "results": [
     {
-      "entity": "http://group2.org/cskg/scams",
+      "entity": "http://group2.org/cskg/aigeneratedlures",
       "entity_type": "http://docs.oasis-open.org/cti/ns/stix#AttackPattern",
-      "label": "Scams",
-      "relationship": "http://docs.oasis-open.org/cti/ns/stix#uses",
-      "related_entity": "http://group2.org/cskg/cryptocurrencykiosks",
+      "label": "AI-generated lures",
+      "relationship": null,
+      "related_entity": null,
       "related_label": null,
-      "report": "https://www.bleepingcomputer.com/news/security/fbi-americans-lost-over-388-million-to-scams-using-crypto-atms-in-2025/"
+      "report": "https://www.bleepingcomputer.com/news/security/greyvibe-hackers-use-chatgpt-gemini-to-power-cyberattacks/"
     },
     {
       "entity": "http://group2.org/cskg/supplychainattack",

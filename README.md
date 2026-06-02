@@ -51,16 +51,20 @@ The Docker Compose file in this repo is `compose.yml`, not `docker-compose.yml`.
 
 ## Data Sources
 
-The current RSS sources are configured in `pipeline/scraper.py`:
+The current RSS/API sources are configured in `pipeline/scraper.py`:
 
-| Source | RSS URL |
+| Source | URL |
 |---|---|
 | TheHackerNews | `http://feeds.feedburner.com/TheHackersNews` |
 | BleepingComputer | `https://www.bleepingcomputer.com/feed/` |
 | KrebsOnSecurity | `https://krebsonsecurity.com/feed/` |
+| Securelist | `https://securelist.com/feed/` |
+| Check Point Research | `https://research.checkpoint.com/category/threat-research/feed/` |
+| SANS ISC | `https://isc.sans.edu/rssfeed_full.xml` |
 | FortiGuardLabs | `https://filestore.fortinet.com/fortiguard/rss/outbreakalert.xml` |
+| NVD API | `https://services.nvd.nist.gov/rest/json/cves/2.0` |
 
-The current scraper fetches a small number of recent articles per feed and pushes unseen articles into Redis.
+The current scraper fetches a small number of recent articles/CVE records per source and pushes unseen items into Redis.
 
 ## Pipeline Architecture
 
@@ -135,8 +139,8 @@ Example `GET /` response from final runtime verification:
   "graph_db_backend": "Virtuoso",
   "sparql_endpoint": "http://virtuoso:8890/sparql",
   "named_graph": "http://group2.org/cskg",
-  "global_triples": 6423,
-  "cskg_named_graph_triples": 963
+  "global_triples": 6756,
+  "cskg_named_graph_triples": 1009
 }
 ```
 
@@ -145,21 +149,21 @@ Example `GET /stats` response from final runtime verification:
 ```json
 {
   "named_graph": "http://group2.org/cskg",
-  "total_triples": 963,
+  "total_triples": 1009,
   "count_by_type": {
-    "http://docs.oasis-open.org/cti/ns/stix#Report": 89,
-    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 81,
-    "http://docs.oasis-open.org/cti/ns/stix#ThreatActor": 58,
-    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 27,
-    "http://docs.oasis-open.org/cti/ns/stix#Malware": 24,
+    "http://docs.oasis-open.org/cti/ns/stix#Report": 94,
+    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 85,
+    "http://docs.oasis-open.org/cti/ns/stix#ThreatActor": 60,
+    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 30,
+    "http://docs.oasis-open.org/cti/ns/stix#Malware": 25,
     "http://docs.oasis-open.org/cti/ns/stix#Indicator": 11
   },
-  "total_reports": 89,
-  "total_vulnerabilities": 27,
-  "total_malware": 24,
+  "total_reports": 94,
+  "total_vulnerabilities": 30,
+  "total_malware": 25,
   "total_indicators": 11,
-  "total_attack_patterns": 81,
-  "total_threat_actors": 58,
+  "total_attack_patterns": 85,
+  "total_threat_actors": 60,
   "total_sepses_cve_uri": 11
 }
 ```
@@ -265,13 +269,13 @@ Observed final state:
 
 | Metric | Value |
 |---|---:|
-| CSKG named graph triples | 963 |
-| Reports | 89 |
-| Vulnerabilities | 27 |
-| Malware | 24 |
+| CSKG named graph triples | 1009 |
+| Reports | 94 |
+| Vulnerabilities | 30 |
+| Malware | 25 |
 | Indicators | 11 |
-| Attack patterns | 81 |
-| Threat actors | 58 |
+| Attack patterns | 85 |
+| Threat actors | 60 |
 | SEPSES CVE URIs | 11 |
 
 The final runtime evidence uses only the CSKG named graph `<http://group2.org/cskg>` for graph-size and entity-count reporting.
