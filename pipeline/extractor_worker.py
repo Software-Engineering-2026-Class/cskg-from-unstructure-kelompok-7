@@ -1,6 +1,7 @@
 import redis
 import json
 import os
+import time
 from pipeline.extractor import get_extraction_chain
 from typing import cast, Tuple, Optional
 from dotenv import load_dotenv
@@ -16,13 +17,18 @@ def connect_to_redis():
     """Connects to Redis with retries."""
     while True:
         try:
-            r = redis.Redis(host=R_HOST, port=R_PORT)  # No decode_responses here
+            r = redis.Redis(
+                host=R_HOST,
+                port=R_PORT,
+                socket_connect_timeout=5,
+                socket_timeout=15,
+            )  # No decode_responses here
             r.ping()
             print("Extractor connected to Redis.")
             return r
         except redis.ConnectionError as e:
             print(f"Extractor waiting for Redis... ({e})")
-            raise e
+            time.sleep(5)
 
 
 def run_extractor():
@@ -66,6 +72,10 @@ def run_extractor():
                 f"  [EXTRACTOR] Finished processing. Pushed to '{EXTRACTIONS_QUEUE}'."
             )
 
+        except redis.TimeoutError as e:
+            print(f"Redis timeout while waiting for article: {e}")
+            r = connect_to_redis()
+            continue
         except Exception as e:
             print(f"Error processing article: {e}")
             # In production, push to a dead-letter queue

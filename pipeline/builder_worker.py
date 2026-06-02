@@ -20,7 +20,12 @@ SPARQL_ENDPOINT = "http://virtuoso:8890/sparql"
 def connect_to_redis():
     while True:
         try:
-            r = redis.Redis(host=R_HOST, port=R_PORT)
+            r = redis.Redis(
+                host=R_HOST,
+                port=R_PORT,
+                socket_connect_timeout=5,
+                socket_timeout=15,
+            )
             r.ping()
             print("GraphBuilder connected to Redis.")
             return r
@@ -86,6 +91,10 @@ def run_builder():
 
             print(f"  [BUILDER] {len(g_new)} triples INSERTED into Virtuoso.")
 
+        except redis.TimeoutError as e:
+            print(f"Redis timeout while waiting for extraction: {e}")
+            r = connect_to_redis()
+            continue
         except Exception as e:
             print(f"Error adding to graph: {e}")
             time.sleep(1)
