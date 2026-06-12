@@ -1,0 +1,4 @@
+# Compatibility wrapper for environments that expect docker-compose.yml.
+# The canonical service definition is kept in compose.yml.
+include:
+  - compose.yml
