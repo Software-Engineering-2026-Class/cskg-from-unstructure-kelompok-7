@@ -189,6 +189,16 @@ External linking is also present through SEPSES CVE URIs. CVE-formatted vulnerab
 | Entity normalization | `owl:sameAs` |
 | External CVE linking | 22 SEPSES CVE URIs |
 
+### Interactive Visual Evidence
+
+An offline interactive JavaScript network visualization is available at:
+
+`docs/visualization/cskg_full_network_offline_canvas.html`
+
+The visualization uses the generated `cskg_full_dump.ttl` output to inspect graph completeness, STIX-style entity coverage, and integration/linking relationships. It supports node type filters, predicate filters, search, zoom, pan, and node/edge detail inspection.
+
+This visual evidence supports the integration/linking evaluation by showing relationships such as `stix:mentions`, `stix:uses`, `stix:targets`, `stix:exploits`, `stix:patched`, `stix:reports`, and `owl:sameAs`.
+
 ### Known Limitations
 
 - The graph is complete for the final collected RSS/API batch, but it is not intended to represent the entire cybersecurity domain.
