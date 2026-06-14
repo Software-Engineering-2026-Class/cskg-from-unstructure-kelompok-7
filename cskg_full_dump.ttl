@@ -1,90 +1,1163 @@
 @prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix ns1:	<http://group2.org/cskg/> .
 @prefix ns2:	<http://docs.oasis-open.org/cti/ns/stix#> .
-ns1:trapdoor	rdf:type	ns2:Malware .
+ns1:automatedpentesting	rdf:type	ns2:AttackPattern .
 @prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
-ns1:trapdoor	rdfs:label	"Trapdoor" ;
-	ns2:uses	<http://group2.org/cskg/455maliciousandroidapps> ,
-		<http://group2.org/cskg/183commandandcontrolc2domains> ;
-	ns2:targets	ns1:androiddeviceusers .
-ns1:adfraud	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"ad fraud" .
-ns1:malvertising	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"malvertising" .
-<https://thehackernews.com/2026/05/trapdoor-android-ad-fraud-scheme-hit.html>	rdf:type	ns2:Report .
+ns1:automatedpentesting	rdfs:label	"automated pentesting" .
+<https://thehackernews.com/2026/06/your-automated-pentest-looks-clean-see.html>	rdf:type	ns2:Report .
 @prefix dcterms:	<http://purl.org/dc/terms/> .
-<https://thehackernews.com/2026/05/trapdoor-android-ad-fraud-scheme-hit.html>	dcterms:created	"Tue, 19 May 2026 22:08:12 +0530" ;
-	ns2:mentions	ns1:trapdoor ,
-		ns1:adfraud ,
-		ns1:malvertising ,
-		<http://group2.org/cskg/183commandandcontrolc2domains> .
-<http://group2.org/cskg/183commandandcontrolc2domains>	rdf:type	ns2:Indicator ;
-	rdfs:label	"183 command-and-control (C2) domains" .
-ns1:dirtycbc	rdf:type	ns2:Vulnerability ;
-	rdfs:label	"DirtyCBC" .
-ns1:dirtydecrypt	rdf:type	ns2:Vulnerability ;
-	rdfs:label	"DirtyDecrypt" ;
-	ns2:variant_of	ns1:dirtycbc .
-<https://thehackernews.com/2026/05/dirtydecrypt-poc-released-for-linux.html>	rdf:type	ns2:Report ;
-	dcterms:created	"Tue, 19 May 2026 20:26:26 +0530" ;
-	ns2:mentions	ns1:dirtycbc ,
-		ns1:dirtydecrypt ,
-		ns1:localprivilegeescalationlpe .
-ns1:localprivilegeescalationlpe	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"local privilege escalation (LPE)" .
-ns1:zellicandv12securityteam	ns2:reports	ns1:dirtydecrypt .
-<https://www.bleepingcomputer.com/news/microsoft/microsoft-plans-to-improve-windows-11-driver-quality-in-2026/>	rdf:type	ns2:Report ;
-	dcterms:created	"Tue, 19 May 2026 12:22:30 -0400" .
-ns1:microsoft	ns2:reports	ns1:userreports ;
-	ns2:patched	ns1:securitybugs .
-<https://www.bleepingcomputer.com/news/microsoft/microsoft-blames-undismissible-teams-location-prompts-on-macos-update/>	rdf:type	ns2:Report ;
-	dcterms:created	"Tue, 19 May 2026 12:10:47 -0400" .
-ns1:publicgithubrepository	rdf:type	ns2:Indicator ;
-	rdfs:label	"public GitHub repository" ;
-	ns2:targets	ns1:awsgovcloudaccounts ,
-		ns1:cisainternalsystems .
-<https://krebsonsecurity.com/2026/05/cisa-admin-leaked-aws-govcloud-keys-on-github/>	rdf:type	ns2:Report ;
-	dcterms:created	"Mon, 18 May 2026 20:48:21 +0000" ;
-	ns2:mentions	ns1:publicgithubrepository ,
-		ns1:dataleak .
-ns1:dataleak	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"data leak" .
-ns1:apple	ns2:patched	ns1:securitybugs .
-<https://krebsonsecurity.com/2026/05/patch-tuesday-may-2026-edition/>	rdf:type	ns2:Report ;
-	dcterms:created	"Tue, 12 May 2026 21:46:45 +0000" ;
-	ns2:mentions	ns1:socialengineering .
-ns1:socialengineering	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"social engineering" .
-ns1:google	ns2:patched	ns1:securitybugs .
-ns1:oracle	ns2:patched	ns1:securitybugs .
-ns1:mozilla	ns2:patched	ns1:securitybugs .
-ns1:rommanipulation	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"ROM manipulation" .
+<https://thehackernews.com/2026/06/your-automated-pentest-looks-clean-see.html>	dcterms:created	"Wed, 10 Jun 2026 15:57:49 +0530" ;
+	ns2:mentions	ns1:automatedpentesting .
+ns1:picussecurity	ns2:reports	ns1:automatedpentesting .
+ns1:informationdisclosure	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"information disclosure" .
+<https://thehackernews.com/2026/06/microsoft-patches-record-206-flaws.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 15:08:13 +0530" ;
+	ns2:mentions	<http://group2.org/cskg/206securityvulnerabilities> ,
+		ns1:spoofing ,
+		ns1:informationdisclosure ,
+		ns1:privilegeescalation ,
+		ns1:remotecodeexecution .
+<http://group2.org/cskg/206securityvulnerabilities>	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"206 security vulnerabilities" .
+ns1:spoofing	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"spoofing" .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-some-upgraded-windows-pcs-fail-to-install-monthly-updates/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 07:33:32 -0400" .
+@prefix ns5:	<https://w3id.org/sepses/resource/cve/> .
+ns5:CVE-2024-38106	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2024-38106" .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-patches-yellowkey-greenplasma-miniplasma-zero-days/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 05:57:33 -0400" ;
+	ns2:mentions	ns5:CVE-2024-38107 ,
+		ns5:CVE-2024-38063 ,
+		ns5:CVE-2024-38106 ,
+		ns1:securityfeaturebypass ,
+		ns1:privilegeescalation .
+ns5:CVE-2024-38107	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2024-38107" .
+ns5:CVE-2024-38063	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2024-38063" .
+ns1:securityfeaturebypass	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Security Feature Bypass" .
+ns1:mfafatigue	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"MFA fatigue" .
+<https://www.bleepingcomputer.com/news/security/the-5-best-practices-for-secure-identity-verification/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 10:05:15 -0400" ;
+	ns2:mentions	ns1:mfafatigue ,
+		ns1:socialengineering ,
+		ns1:phishing .
+ns1:China-nexus_state-sponsored_threat_actors	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"China-nexus state-sponsored threat actors" .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+ns1:China-nexus_state-sponsored_threat_actors	owl:sameAs	ns1:chinanexusstatesponsoredthreatactors .
+ns1:mappingexposedservices	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"mapping exposed services" .
+ns1:lumen	ns2:observes	ns1:jdybotnet .
+ns1:chinanexusstatesponsoredthreatactors	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:jdybotnet .
+<https://thehackernews.com/2026/06/china-linked-jdy-botnet-expands-to-1500.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 21:38:42 +0530" ;
+	ns2:mentions	ns1:jdybotnet ,
+		ns1:mappingexposedservices ,
+		ns1:chinanexusstatesponsoredthreatactors ,
+		ns1:fingerprinting ,
+		ns1:scanning .
+ns1:fingerprinting	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"fingerprinting" .
+ns1:scanning	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"scanning" .
+ns1:shinyhunters	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:datatheft ;
+	ns2:targets	ns1:oraclepeoplesoftservers ;
+	ns2:exploits	ns1:oraclepeoplesoftflaw ;
+	ns2:attributed_to	ns1:unc6240 .
+<https://www.bleepingcomputer.com/news/security/oracle-peoplesoft-servers-hacked-in-shinyhunters-data-theft-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 14:31:57 -0400" ;
+	ns2:mentions	ns1:datatheft ,
+		ns1:shinyhunters .
+ns1:ShinyHunters	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"ShinyHunters" ;
+	owl:sameAs	ns1:shinyhunters .
+<https://www.bleepingcomputer.com/news/security/path-traversal-flaw-in-ai-dev-platform-langflow-exploited-in-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 17:23:44 -0400" ;
+	ns2:mentions	ns1:pathtraversal ,
+		ns5:CVE-2026-5027 .
+<https://www.bleepingcomputer.com/news/security/github-disables-microsoft-repos-pushing-password-stealing-malware/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 11:42:40 -0400" .
+ns1:microsoft	ns2:disrupted	ns1:continuousintegrationpipelines ;
+	ns2:patched	ns1:cve202438107 ,
+		ns1:cve202438063 ,
+		ns1:cve202438106 ,
+		<http://group2.org/cskg/206securityvulnerabilities> ,
+		ns1:windowsupdatestandaloneinstaller ,
+		ns1:nearly200securityholes ,
+		ns1:june2026patchtuesdayvulnerabilities ,
+		<http://group2.org/cskg/200flaws> ,
+		ns1:threezerodayvulnerabilities ,
+		ns1:kb5093998 ,
+		ns1:kb5094126 ,
+		ns1:exchangeservervulnerability ;
+	ns2:resolved	ns1:bitlockerrecoveryissue .
+<https://thehackernews.com/2026/06/meta-to-use-off-site-business-data-for.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 22:33:58 +0530" .
+ns5:CVE-2026-44963	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-44963" .
+<https://thehackernews.com/2026/06/veeam-backup-replication-rce-flaw-lets.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 22:09:47 +0530" ;
+	ns2:mentions	ns1:remotecodeexecution ,
+		ns5:CVE-2026-44963 .
+ns1:cve202644963	ns2:targets	ns1:veeambackupreplication .
+<https://www.bleepingcomputer.com/news/security/oracle-mitigates-peoplesoft-zero-day-exploited-in-data-theft-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 15:39:53 -0400" ;
+	ns2:mentions	ns1:datatheft ,
+		ns1:remotecodeexecution ,
+		ns1:shinyhunter ,
+		ns5:CVE-2026-35273 .
+ns1:ShinyHunter	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"ShinyHunter" ;
+	owl:sameAs	ns1:shinyhunter .
+ns1:shinyhunter	rdf:type	ns2:ThreatActor ;
+	ns2:exploits	ns1:cve202635273 .
+ns5:CVE-2026-35273	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-35273" .
+<https://thehackernews.com/2026/06/rethinking-mdr-as-attackers-and.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 16:30:00 +0530" .
+ns1:defacement	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Defacement" .
+<https://krebsonsecurity.com/2026/06/hackers-used-metas-ai-support-bot-to-seize-instagram-accounts/>	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 01 Jun 2026 17:32:50 +0000" ;
+	ns2:mentions	ns1:defacement ,
+		ns1:telegram ,
+		ns1:accounttakeover .
+ns1:telegram	rdf:type	ns2:Indicator ;
+	rdfs:label	"Telegram" ;
+	ns2:propagated_via	ns1:instructionsformetasaisupportassistantbot .
+ns1:accounttakeover	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Account takeover" .
+ns1:russiasintelligenceagencies	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:starkindustriessolutions ,
+		ns1:itinfrastructure ;
+	ns2:targets	ns1:europeanunion .
+ns1:cyberattacks	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cyberattacks" .
+<https://krebsonsecurity.com/2026/05/netherlands-seizes-800-servers-arrests-2-for-aiding-cyberattacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 25 May 2026 13:21:49 +0000" ;
+	ns2:mentions	ns1:disinformationcampaigns ,
+		ns1:influenceoperations ,
+		ns1:russiasintelligenceagencies ,
+		ns1:cyberattacks .
+ns1:disinformationcampaigns	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"disinformation campaigns" .
+ns1:influenceoperations	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"influence operations" .
+<http://group2.org/cskg/Russia%27s_intelligence_agencies>	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Russia's intelligence agencies" ;
+	owl:sameAs	ns1:russiasintelligenceagencies .
+ns1:memoryoverread	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"memory overread" .
+ns1:probing	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"probing" .
+@prefix ns7:	<https://fortiguard.fortinet.com/outbreak-alert/> .
+ns7:citrix-netscaler-memory-overread	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 28 May 2026 00:00:00 -0700" ;
+	ns2:mentions	ns1:memoryoverread ,
+		ns1:probing ,
+		ns5:CVE-2026-3055 .
+ns1:fortiguardlabs	ns2:observes	ns1:citrixnetscaleradcandgatewayappliances .
+ns5:CVE-2026-3055	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-3055" .
+ns1:attackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"attackers" ;
+	ns2:uses	ns1:credentialstealer ;
+	ns2:targets	ns1:archuserrepositoryaur ,
+		ns1:citrixnetscaleradcandgatewayappliances ;
+	ns2:exploits	ns1:ivantisentryflaw ,
+		ns1:cve20265027 ,
+		ns1:cve20260257 ,
+		ns1:unauthenticatedaccessflaw ,
+		ns1:cve20263055 .
+ns1:remotecodeexecution	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"remote code execution" ,
+		"Remote Code Execution" .
+ns7:cisco-asa-and-ftd-firewall-zero-day	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 27 Apr 2026 00:00:00 -0700" ;
+	ns2:mentions	ns1:remotecodeexecution ,
+		ns1:ciscosecurefirewallthreatdefenseftdzeroday ,
+		ns1:ciscosecurefirewalladaptivesecurityapplianceasazeroday ,
+		ns1:manipulatingreadonlymemoryrom .
 ns1:ciscosecurefirewallthreatdefenseftdzeroday	rdf:type	ns2:Vulnerability ;
 	rdfs:label	"Cisco Secure Firewall Threat Defense (FTD) zero-day" .
-ns1:unknownthreatactor	ns2:exploits	ns1:ciscosecurefirewalladaptivesecurityapplianceasazeroday ,
-		ns1:ciscosecurefirewallthreatdefenseftdzeroday .
-@prefix ns5:	<https://fortiguard.fortinet.com/outbreak-alert/> .
-ns5:cisco-asa-and-ftd-firewall-zero-day	rdf:type	ns2:Report ;
-	dcterms:created	"Mon, 27 Apr 2026 00:00:00 -0700" ;
-	ns2:mentions	ns1:ciscosecurefirewalladaptivesecurityapplianceasazeroday ,
-		ns1:remotecodeexecution ,
-		ns1:rommanipulation ,
+ns1:unidentifiedthreatactors	ns2:exploits	ns1:ciscosecurefirewalladaptivesecurityapplianceasazeroday ,
 		ns1:ciscosecurefirewallthreatdefenseftdzeroday .
 ns1:ciscosecurefirewalladaptivesecurityapplianceasazeroday	rdf:type	ns2:Vulnerability ;
 	rdfs:label	"Cisco Secure Firewall Adaptive Security Appliance (ASA) zero-day" .
-ns1:remotecodeexecution	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"Remote code execution" .
-ns1:arbitraryfileupload	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"Arbitrary file upload" .
-@prefix ns6:	<https://w3id.org/sepses/resource/cve/> .
-ns6:CVE-2025-52691	rdf:type	ns2:Vulnerability ;
-	rdfs:label	"CVE-2025-52691" .
+ns1:manipulatingreadonlymemoryrom	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"manipulating read-only memory (ROM)" .
+<https://thehackernews.com/2026/06/cisa-adds-exploited-magento-rce-flaw.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 12:49:33 +0530" ;
+	ns2:mentions	ns1:deserializationofuntrusteddata ,
+		ns5:CVE-2026-45247 .
+ns5:CVE-2026-45247	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-45247" .
+ns1:cisa	ns2:reports	ns1:cve202642271 ,
+		ns1:cve202628318 ,
+		ns1:solarwindsservuflaw ,
+		ns1:cve202645247 ;
+	ns2:patched	ns1:ivantisentryflaw .
+ns1:deserializationofuntrusteddata	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"deserialization of untrusted data" .
+ns1:mirasvitcachewarmer	ns2:exploits	ns1:cve202645247 .
+ns1:cryptocurrencyfraud	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cryptocurrency fraud" .
+<https://thehackernews.com/2026/06/doj-disrupts-southeast-asia-crypto.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 11:36:25 +0530" ;
+	ns2:mentions	ns1:cryptocurrencyfraud ,
+		ns1:cyberenabledfraud .
+ns1:cyberenabledfraud	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cyber-enabled fraud" .
+ns1:usdepartmentofjustice	ns2:disrupted	ns1:cryptocurrencyfraud ,
+		ns1:cyberenabledfraud .
+ns1:chinesespeakingcybercrimegroup	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:atlasbackdoor ;
+	ns2:targets	ns1:europeanspace .
+ns1:atlasbackdoor	rdf:type	ns2:Malware ;
+	rdfs:label	"Atlas backdoor" .
+ns1:Chinese-speaking_cybercrime_group	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Chinese-speaking cybercrime group" ;
+	owl:sameAs	ns1:chinesespeakingcybercrimegroup .
+<https://www.bleepingcomputer.com/news/security/chinese-hackers-use-new-atlas-rat-malware-in-european-cyberattacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 03 Jun 2026 17:45:27 -0400" ;
+	ns2:mentions	ns1:chinesespeakingcybercrimegroup ,
+		ns1:atlasbackdoor .
+ns1:nobitex	rdf:type	ns2:ThreatActor ;
+	ns2:located_in	ns1:iran .
+<https://www.bleepingcomputer.com/news/security/the-us-sanctions-nobitex-crypto-exchange-used-by-ransomware/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 03 Jun 2026 16:31:22 -0400" ;
+	ns2:mentions	ns1:nobitex ,
+		ns1:facilitatingpaymentsrelatedtoterroristactivities .
+ns1:Nobitex	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Nobitex" ;
+	owl:sameAs	ns1:nobitex .
+ns1:facilitatingpaymentsrelatedtoterroristactivities	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"facilitating payments related to terrorist activities" .
+ns1:serversiderequestforgery	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Server-side request forgery" .
+ns5:CVE-2026-20230	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-20230" .
+ns1:cve202620230	ns2:has_similarities_with	ns1:serversiderequestforgery .
+<https://thehackernews.com/2026/06/cisco-patches-cve-2026-20230-in-unified.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 22:25:51 +0530" ;
+	ns2:mentions	ns1:serversiderequestforgery ,
+		ns5:CVE-2026-20230 .
+ns1:cisco	ns2:patched	ns1:cve202620230 .
+<https://thehackernews.com/2026/06/claude-code-github-action-flaw-let-one.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 20:45:26 +0530" ;
+	ns2:mentions	ns1:githubissueexploitation ,
+		ns1:claudecodegithubactionflaw ,
+		ns1:ryotak .
+ns1:githubissueexploitation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"GitHub issue exploitation" .
+ns1:claudecodegithubactionflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Claude Code GitHub Action flaw" ;
+	ns2:exploits	ns1:publicrepositories .
+ns1:ryotak	rdf:type	ns2:ThreatActor ;
+	ns2:observes	ns1:claudecodegithubactionflaw .
+ns1:RyotaK	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"RyotaK" ;
+	owl:sameAs	ns1:ryotak .
+<https://www.bleepingcomputer.com/news/software/brave-software-releases-origin-for-a-paid-bloat-free-browsing-experience/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 17:37:10 -0400" .
+ns1:cryptocurrencyminer	rdf:type	ns2:Malware ;
+	rdfs:label	"cryptocurrency miner" ;
+	ns2:targets	ns1:holabrowser .
+ns1:supplychainattack	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Supply chain attack" ,
+		"supply chain attack" ,
+		"supply-chain attack" ;
+	ns2:uses	ns1:cryptocurrencyminer .
+<https://www.bleepingcomputer.com/news/security/hola-browser-for-windows-compromised-to-deliver-cryptominer/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 04 Jun 2026 17:27:25 -0400" ;
+	ns2:mentions	ns1:cryptocurrencyminer ,
+		ns1:supplychainattack .
+ns1:threatactors	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:crosssitescriptingxss ;
+	ns2:targets	ns1:outlookwebaccessusers ;
+	ns2:exploits	ns1:exchangeservervulnerability ,
+		ns1:cve20263300 .
+ns1:Threat_actors	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Threat actors" ;
+	owl:sameAs	ns1:threatactors .
+<https://thehackernews.com/2026/06/hackers-exploit-critical-everest-forms.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 05 Jun 2026 14:08:59 +0530" ;
+	ns2:mentions	ns5:CVE-2026-3300 ,
+		ns1:threatactors ,
+		ns1:remotecodeexecution .
+ns5:CVE-2026-3300	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-3300" .
+ns1:cve20263300	ns2:targets	ns1:everestformspro ,
+		ns1:everestformsproplugin .
+ns1:bankingmalware	rdf:type	ns2:Malware ;
+	rdfs:label	"banking malware" ;
+	ns2:propagated_via	ns1:piratestreamingapps .
+ns1:impersonation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"impersonation" .
+ns1:lookalikefifadomains	rdf:type	ns2:Indicator ;
+	rdfs:label	"lookalike FIFA domains" ;
+	ns2:impersonates	ns1:fifa .
+<https://thehackernews.com/2026/06/fifa-world-cup-2026-scams-are-already.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 05 Jun 2026 12:31:41 +0530" ;
+	ns2:mentions	ns1:phishing ,
+		ns1:fraud ,
+		ns1:bankingmalware ,
+		ns1:impersonation ,
+		ns1:lookalikefifadomains .
+ns1:phishing	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Phishing" ,
+		"phishing" .
+ns1:fraud	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"fraud" .
+<https://www.bleepingcomputer.com/news/security/new-cisco-sd-wan-flaw-exploited-in-zero-day-attacks-to-gain-root/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 05 Jun 2026 02:24:20 -0400" ;
+	ns2:mentions	ns5:CVE-2026-20245 ,
+		ns1:rootprivilegeescalation .
+ns5:CVE-2026-20245	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-20245" .
+ns1:cve202620245	ns2:located_in	ns1:ciscocatalystsdwanmanager .
+ns1:rootprivilegeescalation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"root privilege escalation" ;
+	ns2:exploits	ns1:cve202620245 .
+ns1:brightdata	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:iossdk ;
+	ns2:has_similarities_with	ns1:luminati .
+ns1:proxynetworkusage	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Proxy network usage" .
+ns1:Bright_Data	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Bright Data" ;
+	owl:sameAs	ns1:brightdata .
+<https://thehackernews.com/2026/06/free-apps-are-quietly-turning-smart-tvs.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 06 Jun 2026 13:59:05 +0530" ;
+	ns2:mentions	ns1:proxynetworkusage ,
+		ns1:brightdata .
+ns1:cve202628318	ns2:targets	ns1:solarwindsservu .
+<https://thehackernews.com/2026/06/cisa-adds-actively-exploited-solarwinds.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 06 Jun 2026 13:44:31 +0530" ;
+	ns2:mentions	ns5:CVE-2026-28318 ,
+		ns1:denialofservicedos .
+ns1:denialofservicedos	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"denial-of-service (DoS)" ,
+		"Denial-of-Service (DoS)" .
+ns5:CVE-2026-28318	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-28318" .
+ns1:suspicioussigninscreens	ns2:impersonates	ns1:toshiba ,
+		ns1:muji .
+<https://www.bleepingcomputer.com/news/security/suspicious-polyfill-login-prompts-pop-up-on-toshiba-muji-websites/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 05 Jun 2026 17:54:42 -0400" ;
+	ns2:mentions	ns1:credentialharvesting .
+ns1:credentialharvesting	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Credential harvesting" .
+ns1:solarwindsservuflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"SolarWinds Serv-U flaw" .
+ns1:hackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"hackers" ;
+	ns2:uses	ns1:hijackeduseraccount ;
+	ns2:targets	ns1:tchap ,
+		ns1:sofihongkong ;
+	ns2:exploits	ns1:thirdpartyvendor ,
+		ns1:solarwindsservuflaw ,
+		ns1:cve20263300 .
+ns1:crashservers	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"crash servers" .
+<https://www.bleepingcomputer.com/news/security/cisa-hackers-now-exploit-solarwinds-serv-u-flaw-to-crash-servers/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 05 Jun 2026 15:15:30 -0400" ;
+	ns2:mentions	ns1:solarwindsservuflaw ,
+		ns1:hackers ,
+		ns1:crashservers .
+ns1:promptinjection	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Prompt Injection" ,
+		"prompt injection" .
+ns1:lockdownmode	ns2:mitigates	ns1:promptinjection .
+<https://thehackernews.com/2026/06/new-chatgpt-lockdown-mode-limits-tools.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 06 Jun 2026 19:06:57 +0530" ;
+	ns2:mentions	ns1:promptinjection .
+ns1:Hackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Hackers" ;
+	owl:sameAs	ns1:hackers .
+<https://www.bleepingcomputer.com/news/security/critical-everest-forms-pro-flaw-exploited-to-take-over-wordpress-sites/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 06 Jun 2026 10:09:26 -0400" ;
+	ns2:mentions	ns1:everestformsproplugin ,
+		ns1:hackers ,
+		ns5:CVE-2026-3300 .
+ns1:everestformsproplugin	rdf:type	ns2:Indicator ;
+	rdfs:label	"Everest Forms Pro plugin" .
+ns1:c0xmo	rdf:type	ns2:Malware ;
+	rdfs:label	"C0XMO" ;
+	ns2:targets	ns1:ddwrtrouterfirmware ;
+	ns2:variant_of	ns1:gafgyt .
+<https://www.bleepingcomputer.com/news/security/c0xmo-botnet-spreads-via-dd-wrt-router-flaw-kills-rival-malware/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sun, 07 Jun 2026 10:17:46 -0400" ;
+	ns2:mentions	ns1:gafgyt ,
+		ns1:c0xmo ,
+		ns1:targetingrouterfirmware .
+ns1:targetingrouterfirmware	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"targeting router firmware" .
+ns1:gafgyt	rdf:type	ns2:Malware ;
+	rdfs:label	"Gafgyt" .
+ns1:Silent_Ransom_Group	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Silent Ransom Group" ;
+	owl:sameAs	ns1:silentransomgroup .
+ns1:silentransomgroup	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:socialengineering ;
+	ns2:targets	ns1:professionalservicesorganizations ,
+		ns1:uslawfirms .
+<https://www.bleepingcomputer.com/news/security/silent-ransom-group-targets-law-firms-with-fake-it-support-calls/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sun, 07 Jun 2026 10:09:19 -0400" ;
+	ns2:mentions	ns1:silentransomgroup ,
+		ns1:datatheft ,
+		ns1:socialengineering .
+ns1:mandiant	ns2:observes	ns1:unc6240 ;
+	ns2:reports	ns1:silentransomgroup .
+ns1:datatheft	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"data theft" ,
+		"Data theft" .
+ns1:socialengineering	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"social engineering" .
+<https://thehackernews.com/2026/06/one-character-linux-kernel-flaw-enables.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 01:47:39 +0530" ;
+	ns2:mentions	ns1:privilegeescalation ,
+		ns1:exodusintelligence ,
+		ns5:CVE-2026-23111 ,
+		ns1:containerbreakout ,
+		ns1:useafterfree .
+ns1:privilegeescalation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Privilege Escalation" ,
+		"privilege escalation" .
+ns1:cve202623111	ns2:patched	ns1:linuxkernel .
+ns1:Exodus_Intelligence	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Exodus Intelligence" ;
+	owl:sameAs	ns1:exodusintelligence .
+ns1:exodusintelligence	rdf:type	ns2:ThreatActor ;
+	ns2:reports	ns1:cve202623111 .
+ns5:CVE-2026-23111	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-23111" .
+ns1:containerbreakout	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"container breakout" .
+ns1:useafterfree	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"use-after-free" .
+ns1:NSO_Group	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"NSO Group" ;
+	owl:sameAs	ns1:nsogroup .
+ns1:spearphishing	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"spear-phishing" .
+<https://thehackernews.com/2026/06/meta-blocks-nso-groups-new-whatsapp.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 08 Jun 2026 22:38:44 +0530" ;
+	ns2:mentions	ns1:spearphishing ,
+		ns1:nsogroup .
+ns1:nsogroup	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:spearphishing ;
+	ns2:targets	ns1:whatsapp .
+ns1:nfcshare	rdf:type	ns2:Malware ;
+	rdfs:label	"NFCShare" ;
+	ns2:propagated_via	ns1:github ;
+	ns2:impersonates	ns1:bankingapps .
+<https://www.bleepingcomputer.com/news/security/nfcshare-android-malware-spreads-via-fake-banking-app-updates-on-github/>	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 08 Jun 2026 18:11:58 -0400" ;
+	ns2:mentions	ns1:fakeupdates ,
+		ns1:nfcshare ,
+		ns1:github .
+ns1:github	rdf:type	ns2:Indicator ;
+	rdfs:label	"GitHub" ;
+	ns2:mitigates	ns1:softwaresupplychainthreats .
+ns1:fakeupdates	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Fake updates" .
+ns1:databreach	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Data breach" ,
+		"data breach" .
+<https://www.bleepingcomputer.com/news/security/sofi-confirms-third-party-data-breach-at-hong-kong-subsidiary/>	rdf:type	ns2:Report ;
+	dcterms:created	"Mon, 08 Jun 2026 17:55:46 -0400" ;
+	ns2:mentions	ns1:databreach ,
+		ns1:hackers .
+ns1:zerodayexploitation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"zero-day exploitation" .
+<https://www.bleepingcomputer.com/news/security/google-patches-fifth-chrome-zero-day-bug-exploited-in-attacks-this-year/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 02:56:27 -0400" ;
+	ns2:mentions	ns1:chromezerodayvulnerability ,
+		ns1:zerodayexploitation .
+ns1:chromezerodayvulnerability	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Chrome zero-day vulnerability" .
+ns1:google	ns2:patched	ns1:chromezerodayvulnerability .
+ns1:frost	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"FROST" ;
+	ns2:uses	ns1:javascript .
+<https://thehackernews.com/2026/06/new-frost-attack-lets-websites-track.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 15:20:41 +0530" ;
+	ns2:mentions	ns1:frost .
+<https://thehackernews.com/2026/06/hades-pypi-attack-19-packages-poisoned.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 14:43:32 +0530" ;
+	ns2:mentions	ns1:miasma ,
+		ns1:supplychaincampaign ,
+		ns1:minishaihulud ,
+		ns1:setuppth ,
+		ns1:hades .
+ns1:setuppth	rdf:type	ns2:Indicator ;
+	rdfs:label	"*-setup.pth" .
+ns1:hades	rdf:type	ns2:Malware ;
+	rdfs:label	"Hades" ;
+	ns2:uses	ns1:setuppth ;
+	ns2:has_similarities_with	ns1:minishaihulud .
+ns1:miasma	rdf:type	ns2:ThreatActor ,
+		ns2:Malware ;
+	rdfs:label	"Miasma" ;
+	ns2:propagated_via	ns1:github ;
+	ns2:uses	ns1:hades ;
+	ns2:targets	ns1:opensourceecosystems .
+ns1:Miasma	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Miasma" ;
+	owl:sameAs	ns1:miasma .
+ns1:supplychaincampaign	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"supply chain campaign" .
+ns1:minishaihulud	rdf:type	ns2:Malware ;
+	rdfs:label	"Mini Shai-Hulud" .
+<https://www.bleepingcomputer.com/news/security/french-govt-messaging-service-breached-in-account-hijacking-attack/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 06:53:00 -0400" ;
+	ns2:mentions	ns1:hijackeduseraccount ,
+		ns1:hackers .
+ns1:hijackeduseraccount	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"hijacked user account" .
+<https://thehackernews.com/2026/06/the-hidden-security-risk-in-modern.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 17:00:00 +0530" .
+ns5:CVE-2023-38036	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2023-38036" .
+<https://www.bleepingcomputer.com/news/security/new-max-severity-ivanti-sentry-flaw-allows-code-execution-as-root/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 02:26:28 -0400" ;
+	ns2:mentions	ns5:CVE-2023-38036 ,
+		ns5:CVE-2023-38035 ,
+		ns1:remotecodeexecution .
+ns1:ivanti	ns2:patched	ns1:cve202338035 ,
+		ns1:cve202338036 .
+ns5:CVE-2023-38035	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2023-38035" .
+ns1:unknownthreatactors	rdf:type	ns2:ThreatActor ;
+	ns2:targets	ns1:servicenowinstances ;
+	ns2:exploits	ns1:unspecifiedservicenowsecurityflaw .
+<https://thehackernews.com/2026/06/servicenow-flaw-exploited-to-gain.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 12:32:08 +0530" ;
+	ns2:mentions	ns1:unknownthreatactors ,
+		ns1:unspecifiedservicenowsecurityflaw ,
+		ns1:unauthorizedaccess .
+ns1:unspecifiedservicenowsecurityflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"unspecified ServiceNow security flaw" .
+ns1:unauthorizedaccess	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"unauthorized access" .
+ns1:unknown_threat_actors	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"unknown threat actors" ;
+	owl:sameAs	ns1:unknownthreatactors .
+<https://thehackernews.com/2026/06/anthropic-releases-claude-fable-5-its.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 13:07:59 +0530" .
+ns1:aidrivenattacks	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"AI-driven attacks" .
+<https://www.bleepingcomputer.com/news/security/why-ai-driven-threats-are-exposing-the-limits-of-msp-security-stacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 10:00:10 -0400" ;
+	ns2:mentions	ns1:aidrivenattacks .
+ns1:openclaw	rdf:type	ns2:Malware ;
+	rdfs:label	"OpenClaw" ;
+	ns2:exploits	ns1:vcards ,
+		ns1:locationpins ,
+		ns1:sharedcontacts .
+<https://thehackernews.com/2026/06/new-attacks-trick-openclaw-ai-agent.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 23:16:32 +0530" ;
+	ns2:mentions	ns1:promptinjection ,
+		ns1:openclaw .
+ns1:varonis	ns2:reports	ns1:openclaw .
+ns1:imperva	ns2:reports	ns1:openclaw .
+ns1:greatxml	rdf:type	ns2:Malware ;
+	rdfs:label	"GreatXML" ;
+	ns2:exploits	ns1:windowsbitlocker .
+ns1:blogger	rdf:type	ns2:Indicator ;
+	rdfs:label	"Blogger" .
+ns1:windowsbitlockerbypass	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Windows BitLocker bypass" .
+<https://thehackernews.com/2026/06/new-greatxml-exploit-bypasses-windows.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 23:13:52 +0530" ;
+	ns2:mentions	ns1:chaoticeclipse ,
+		ns1:greatxml ,
+		ns1:blogger ,
+		ns1:windowsbitlockerbypass .
+ns1:mainesofficialbreachportal	rdf:type	ns2:Indicator ;
+	rdfs:label	"Maine's official breach portal" .
+<https://www.bleepingcomputer.com/news/security/maine-breach-portal-abused-to-publish-fake-data-breach-disclosures/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 18:44:58 -0400" ;
+	ns2:mentions	ns1:fraudulentdatabreachdisclosures ,
+		ns1:misinformationcampaign ,
+		ns1:mainesofficialbreachportal .
+ns1:fraudulentdatabreachdisclosures	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"fraudulent data breach disclosures" .
+ns1:misinformationcampaign	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"misinformation campaign" .
+<https://www.bleepingcomputer.com/news/security/japanese-energy-firm-loses-drive-with-data-of-109-million-clients/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 19:14:16 -0400" .
+ns1:cryptocurrencylaundering	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cryptocurrency laundering" .
+<https://thehackernews.com/2026/06/europol-disrupts-audia6-crypto.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 12:08:41 +0530" ;
+	ns2:mentions	ns1:cryptocurrencylaundering ,
+		ns1:cybercriminalnetworks ,
+		ns1:ransomwaregangs .
+ns1:cybercriminalnetworks	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:audia6 .
+ns1:cybercriminal_networks	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"cybercriminal networks" ;
+	owl:sameAs	ns1:cybercriminalnetworks .
+ns1:ransomwaregangs	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:audia6 .
+ns1:ransomware_gangs	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"ransomware gangs" ;
+	owl:sameAs	ns1:ransomwaregangs .
+ns1:europol	ns2:disrupted	ns1:audia6 .
+<https://www.bleepingcomputer.com/news/security/pharmaceutical-giant-novo-nordisk-discloses-security-breach/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 06:13:19 -0400" ;
+	ns2:mentions	ns1:databreach .
+ns1:apikeys	rdf:type	ns2:Indicator ;
+	rdfs:label	"API keys" .
+<https://www.bleepingcomputer.com/news/security/early-warning-signs-of-supply-chain-attacks-live-in-the-dark-web/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 10:01:11 -0400" ;
+	ns2:mentions	ns1:apikeys ,
+		ns1:supplychainattack .
+ns1:conspiracy	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"conspiracy" .
+ns1:contiransomware	rdf:type	ns2:Malware ;
+	rdfs:label	"Conti ransomware" .
+ns1:conti	rdf:type	ns2:ThreatActor .
+ns1:Conti	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Conti" ;
+	owl:sameAs	ns1:conti .
+<https://www.bleepingcomputer.com/news/security/ukrainian-national-pleads-guilty-to-role-in-conti-ransomware-operation/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 13:54:28 -0400" ;
+	ns2:mentions	ns1:conspiracy ,
+		ns1:contiransomware ,
+		ns1:conti .
+ns1:authenticationbypassvulnerability	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"authentication bypass vulnerability" ;
+	ns2:targets	ns1:phpbbforumsoftware .
+<https://www.bleepingcomputer.com/news/security/phpbb-forum-fixes-auth-bypass-bug-lurking-for-a-decade/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 14:19:34 -0400" ;
+	ns2:mentions	ns1:authenticationbypassvulnerability ,
+		ns1:authenticationbypass .
+ns1:authenticationbypass	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"authentication bypass" ,
+		"Authentication bypass" .
+ns7:pan-os-globalprotect-auth-bypass	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 00:00:00 -0700" ;
+	ns2:mentions	ns1:reconnaissance ,
+		ns1:lateralmovement ,
+		ns5:CVE-2026-0257 ,
+		ns1:authenticationbypass ,
+		ns1:attackers .
+ns1:cve20260257	ns2:targets	ns1:paloaltonetworksfirewalls .
+ns1:Attackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Attackers" ;
+	owl:sameAs	ns1:attackers .
+ns1:lateralmovement	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Lateral movement" .
+ns5:CVE-2026-0257	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-0257" .
+ns1:Unknown_Attackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Unknown Attackers" ;
+	owl:sameAs	ns1:unknownattackers .
+<https://thehackernews.com/2026/06/400-arch-linux-aur-packages-hijacked-to.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 00:54:50 +0530" ;
+	ns2:mentions	ns1:unknownattackers ,
+		ns1:credentialstealer ,
+		ns1:ebpfrootkit ,
+		ns1:supplychainattack ,
+		ns1:credentialharvesting .
+ns1:unknownattackers	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:credentialstealer ;
+	ns2:targets	ns1:archuserrepositoryaur .
+ns1:credentialstealer	rdf:type	ns2:Malware ;
+	rdfs:label	"Credential stealer" ,
+		"credential stealer" ;
+	ns2:propagated_via	ns1:archuserrepositoryaur ;
+	ns2:uses	ns1:ebpfrootkit .
+ns1:ebpfrootkit	rdf:type	ns2:Malware ;
+	rdfs:label	"eBPF rootkit" .
+ns1:outsider	rdf:type	ns2:Malware ;
+	rdfs:label	"Outsider" ;
+	ns2:propagated_via	ns1:phishing .
+ns1:chinesecybercrimenetwork	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:gemini ,
+		ns1:outsider ;
+	ns2:targets	ns1:americans .
+ns1:Chinese_cybercrime_network	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Chinese cybercrime network" ;
+	owl:sameAs	ns1:chinesecybercrimenetwork .
+<https://thehackernews.com/2026/06/google-sues-chinese-smishing-network.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 00:29:32 +0530" ;
+	ns2:mentions	ns1:outsider ,
+		ns1:chinesecybercrimenetwork ,
+		ns1:phishingasaservice ,
+		ns1:phishing .
+ns1:mythos5	rdf:type	ns2:Malware ;
+	rdfs:label	"Mythos 5" .
+<https://thehackernews.com/2026/06/us-orders-anthropic-to-suspend-fable-5.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 11:12:50 +0530" ;
+	ns2:mentions	ns1:claudefable5 ,
+		ns1:mythos5 .
+ns1:claudefable5	rdf:type	ns2:Malware ;
+	rdfs:label	"Claude Fable 5" .
+ns1:cve202620253	ns2:targets	ns1:splunkenterprise .
+ns1:unauthenticatedfileoperations	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"unauthenticated file operations" .
+<https://thehackernews.com/2026/06/critical-splunk-enterprise-flaw-lets.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 18:53:03 +0530" ;
+	ns2:mentions	ns1:remotecodeexecution ,
+		ns5:CVE-2026-20253 ,
+		ns1:unauthenticatedfileoperations .
+ns1:unauthenticateduser	ns2:exploits	ns1:cve202620253 .
+ns1:splunk	ns2:patched	ns1:cve202620253 .
+ns5:CVE-2026-20253	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-20253" .
+<https://www.bleepingcomputer.com/news/microsoft/hands-on-with-intelligent-terminal-an-ai-powered-windows-terminal/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sun, 07 Jun 2026 19:20:02 -0400" .
+<https://thehackernews.com/2026/06/litellm-flaw-cve-2026-42271-exploited.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 11:56:14 +0530" ;
+	ns2:mentions	ns1:commandinjection ,
+		ns5:CVE-2026-42271 .
+ns5:CVE-2026-42271	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-42271" .
+ns1:commandinjection	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"command injection" .
+ns1:cve202642271	ns2:targets	ns1:berriailitellm .
+ns1:shadowearth066	rdf:type	ns2:ThreatActor ;
+	ns2:targets	ns1:ukrainianorganisations ;
+	ns2:exploits	ns1:cve20258088 ;
+	ns2:has_similarities_with	ns1:uac0226 ;
+	ns2:attributed_to	ns1:trendmicro .
+ns1:uac0226	rdf:type	ns2:ThreatActor .
+ns1:UAC-0226	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"UAC-0226" ;
+	owl:sameAs	ns1:uac0226 .
+ns1:earthdahu	rdf:type	ns2:ThreatActor ;
+	ns2:targets	ns1:ukrainianorganisations ;
+	ns2:exploits	ns1:cve20258088 ;
+	ns2:has_similarities_with	ns1:gamaredon ;
+	ns2:attributed_to	ns1:trendmicro .
+ns1:gamaredon	rdf:type	ns2:ThreatActor .
+ns1:Earth_Dahu	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Earth Dahu" ;
+	owl:sameAs	ns1:earthdahu .
+ns1:Gamaredon	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Gamaredon" ;
+	owl:sameAs	ns1:gamaredon .
+ns5:CVE-2025-8088	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2025-8088" .
+ns1:SHADOW-EARTH-066	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"SHADOW-EARTH-066" ;
+	owl:sameAs	ns1:shadowearth066 .
+<https://thehackernews.com/2026/06/winrar-flaw-exploited-by-russia-aligned.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 17:56:10 +0530" ;
+	ns2:mentions	ns1:shadowearth066 ,
+		ns1:uac0226 ,
+		ns1:earthdahu ,
+		ns1:gamaredon ,
+		ns5:CVE-2025-8088 ,
+		ns1:pathtraversal .
+ns1:pathtraversal	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"path traversal" .
+ns1:aidrivencomputerworm	rdf:type	ns2:Malware ;
+	rdfs:label	"AI-driven computer worm" ;
+	ns2:uses	ns1:locallyhostedopenweightlargelanguagemodel .
+<https://thehackernews.com/2026/06/researchers-build-self-replicating-ai.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 17:29:03 +0530" ;
+	ns2:mentions	ns1:phishing ,
+		ns1:aidrivencomputerworm .
 ns1:remotecodeexecutionrce	rdf:type	ns2:AttackPattern ;
 	rdfs:label	"Remote Code Execution (RCE)" .
-ns5:smartertools-smartermail-rce	rdf:type	ns2:Report ;
-	dcterms:created	"Mon, 06 Apr 2026 00:00:00 -0700" ;
-	ns2:mentions	ns1:arbitraryfileupload ,
-		ns6:CVE-2025-52691 ,
+ns1:protobufjsvulnerabilities	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"protobuf.js vulnerabilities" ;
+	ns2:targets	ns1:denialofservicedos ,
 		ns1:remotecodeexecutionrce .
-ns1:cve202552691	ns2:targets	ns1:smartertoolssmartermail .
+<https://thehackernews.com/2026/06/six-proto6-vulnerabilities-in.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 10:38:35 +0530" ;
+	ns2:mentions	ns1:denialofservicedos ,
+		ns1:remotecodeexecutionrce ,
+		ns1:protobufjsvulnerabilities .
+<https://www.bleepingcomputer.com/news/security/nottingham-university-data-breach-affects-over-450-000-students/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 03:27:53 -0400" .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bitlocker-recovery-bug-on-windows-server-2025/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 04:44:22 -0400" .
+<https://www.bleepingcomputer.com/news/security/south-korea-hits-coupang-with-record-409-million-fine-over-data-breach/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 08:52:41 -0400" ;
+	ns2:mentions	ns1:databreach .
+ns1:personalinformationprotectioncommissionpipc	ns2:located_in	ns1:southkorea .
+<https://thehackernews.com/2026/06/cybersecurity-stars-awards-2026-winners.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 18:56:13 +0530" .
+<https://thehackernews.com/2026/06/threatsday-bulletin-worm-code-leaked-ai.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 18:50:41 +0530" ;
+	ns2:mentions	ns1:rat ,
+		ns1:phishing ,
+		ns1:supplychainattack .
+ns1:rat	rdf:type	ns2:Malware ;
+	rdfs:label	"RAT" .
+<https://www.bleepingcomputer.com/news/security/french-govt-says-tchap-breach-affected-over-73-000-accounts/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 03:09:11 -0400" .
+ns1:fraudulentbreachdisclosures	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"fraudulent breach disclosures" .
+<https://www.bleepingcomputer.com/news/security/maine-disables-data-breach-notification-portal-after-fake-disclosures/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 15:33:32 -0400" ;
+	ns2:mentions	ns1:fraudulentbreachdisclosures .
+<https://thehackernews.com/2026/06/over-400-arch-linux-aur-packages.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 01:03:25 +0530" ;
+	ns2:mentions	ns1:credentialstealer ,
+		ns1:ebpfrootkit ,
+		ns1:attackers ,
+		ns1:archuserrepositoryaurpackages ,
+		ns1:supplychainattack .
+ns1:fable5	rdf:type	ns2:Malware ;
+	rdfs:label	"Fable 5" .
+<https://www.bleepingcomputer.com/news/security/us-gov-asks-anthropic-to-ban-foreign-national-access-to-fable-mythos/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 06:01:32 -0400" ;
+	ns2:mentions	ns1:fable5 ,
+		ns1:jailbreak ,
+		ns1:mythos5 .
+ns1:anthropic	ns2:disrupted	ns1:mythos5 ,
+		ns1:fable5 .
+ns1:jailbreak	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"jailbreak" .
+ns1:formeritemployee	rdf:type	ns2:ThreatActor ;
+	ns2:disrupted	ns1:classroomoperations .
+ns1:Former_IT_employee	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Former IT employee" ;
+	owl:sameAs	ns1:formeritemployee .
+ns1:cyberattack	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Cyberattack" .
+<https://www.bleepingcomputer.com/news/security/ex-school-district-employee-jailed-for-hacks-on-former-employer/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 16:53:13 -0400" ;
+	ns2:mentions	ns1:formeritemployee ,
+		ns1:cyberattack ,
+		ns1:accountdeletion .
+ns1:accountdeletion	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Account deletion" .
+ns1:zerodayattacks	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"zero-day attacks" .
+<https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-check-point-flaw-exploited-by-ransomware-gangs/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 04:18:39 -0400" ;
+	ns2:mentions	ns1:qilinransomware ,
+		ns1:qilinransomwareaffiliates ,
+		ns1:checkpointremoteaccessvpnandmobileaccessvulnerability ,
+		ns1:zerodayattacks .
+ns1:Qilin_ransomware_affiliates	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Qilin ransomware affiliates" ;
+	owl:sameAs	ns1:qilinransomwareaffiliates .
+ns1:qilinransomware	rdf:type	ns2:Malware ;
+	rdfs:label	"Qilin ransomware" .
+ns1:qilinransomwareaffiliates	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:qilinransomware ;
+	ns2:exploits	ns1:checkpointremoteaccessvpnandmobileaccessvulnerability .
+ns1:checkpointremoteaccessvpnandmobileaccessvulnerability	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Check Point Remote Access VPN and Mobile Access vulnerability" .
+ns1:backupreplicationrcevulnerability	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Backup & Replication RCE vulnerability" ;
+	ns2:exploits	ns1:remotecodeexecution .
+<https://www.bleepingcomputer.com/news/security/new-veeam-vulnerability-exposes-backup-servers-to-rce-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 10:27:56 -0400" ;
+	ns2:mentions	ns1:backupreplicationrcevulnerability ,
+		ns1:remotecodeexecution .
+ns1:veeam	ns2:patched	ns1:backupreplicationrcevulnerability ,
+		ns1:cve202644963 .
+ns1:june2026patchtuesdayvulnerabilities	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"June 2026 Patch Tuesday vulnerabilities" .
+ns1:kb5094127	ns2:patched	ns1:june2026patchtuesdayvulnerabilities .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-windows-10-kb5094127-extended-security-update/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 14:35:00 -0400" ;
+	ns2:mentions	ns1:june2026patchtuesdayvulnerabilities .
+<https://www.bleepingcomputer.com/news/security/servicenow-discloses-security-incident-exposing-customer-data/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 17:34:09 -0400" ;
+	ns2:mentions	ns1:unauthenticatedaccessflaw ,
+		ns1:unauthenticatedaccess ,
+		ns1:apiendpoint ,
+		ns1:attackers .
+ns1:unauthenticatedaccess	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"unauthenticated access" .
+ns1:apiendpoint	rdf:type	ns2:Indicator ;
+	rdfs:label	"API endpoint" .
+ns1:unauthenticatedaccessflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"unauthenticated access flaw" ;
+	ns2:propagated_via	ns1:apiendpoint .
+ns1:nearly200securityholes	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Nearly 200 security holes" .
+ns1:exploitcode	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Exploit code" ;
+	ns2:exploits	ns1:threecriticalweaknesses .
+ns1:threecriticalweaknesses	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Three critical weaknesses" .
+<https://krebsonsecurity.com/2026/06/a-record-breaking-patch-tuesday-for-june-2026/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 22:07:28 +0000" ;
+	ns2:mentions	ns1:nearly200securityholes ,
+		ns1:exploitcode ,
+		ns1:threecriticalweaknesses .
+<https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-rolls-out-claude-fable-5-but-its-available-for-a-limited-time/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 22:03:31 -0400" .
+<https://thehackernews.com/2026/06/shinyhunters-exploits-oracle-peoplesoft.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 01:59:23 +0530" ;
+	ns2:mentions	ns1:datatheft ,
+		ns1:shinyhunters ,
+		ns1:unc6240 ,
+		ns1:oraclepeoplesoftflaw ,
+		ns1:extortion .
+ns1:extortion	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Extortion" .
+ns1:unc6240	rdf:type	ns2:ThreatActor ;
+	ns2:targets	ns1:universities .
+ns1:oraclepeoplesoftflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Oracle PeopleSoft flaw" .
+ns1:UNC6240	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"UNC6240" ;
+	owl:sameAs	ns1:unc6240 .
+ns1:activeexploitation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Active exploitation" .
+<https://www.bleepingcomputer.com/news/security/cisa-gives-feds-3-days-to-patch-ivanti-flaw-exploited-in-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 04:26:55 -0400" ;
+	ns2:mentions	ns1:activeexploitation ,
+		ns1:ivantisentryflaw .
+<https://thehackernews.com/2026/06/langgraph-flaw-chain-exposes-self.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 15:20:36 +0530" ;
+	ns2:mentions	ns1:remotecodeexecution ,
+		ns1:sqlinjection .
+ns1:sqlinjection	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"SQL injection" ;
+	ns2:targets	ns1:langgraph .
+<https://thehackernews.com/2026/06/interpol-takes-down-sniper-dz-phishing.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 14:22:55 +0530" ;
+	ns2:mentions	ns1:guedz ,
+		ns1:sniperdz ,
+		ns1:phishingasaservice .
+ns1:sniperdz	rdf:type	ns2:Malware ;
+	rdfs:label	"Sniper Dz" ;
+	ns2:aligned_with	ns1:phishingasaservice .
+ns1:interpol	ns2:disrupted	ns1:sniperdz .
+ns1:phishingasaservice	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Phishing-as-a-service" ,
+		"phishing-as-a-service" .
+ns1:guedz	rdf:type	ns2:ThreatActor ;
+	ns2:attributed_to	ns1:sniperdz .
+ns1:Guedz	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Guedz" ;
+	owl:sameAs	ns1:guedz .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-windows-update-failures-linked-to-wusa-installer/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 07:44:58 -0400" .
+ns1:agentjacking	rdf:type	ns2:Malware ;
+	rdfs:label	"Agentjacking" ;
+	ns2:uses	ns1:sentry ;
+	ns2:targets	ns1:artificialintelligenceaicodingagents .
+<https://thehackernews.com/2026/06/agentjacking-attack-tricks-ai-coding.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 17:34:33 +0530" ;
+	ns2:mentions	ns1:arbitrarycodeexecution ,
+		ns1:agentjacking .
+ns1:archuserrepositoryaurpackages	rdf:type	ns2:Indicator ;
+	rdfs:label	"Arch User Repository (AUR) packages" ;
+	ns2:propagated_via	ns1:infostealermalware ,
+		ns1:linuxrootkit .
+ns1:credentialtheft	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"credential theft" .
+ns1:infostealermalware	rdf:type	ns2:Malware ;
+	rdfs:label	"infostealer malware" ;
+	ns2:targets	ns1:credentialsandaccesstokens .
+<https://www.bleepingcomputer.com/news/security/over-400-arch-linux-packages-compromised-to-push-rootkit-infostealer/>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 13:03:55 -0400" ;
+	ns2:mentions	ns1:archuserrepositoryaurpackages ,
+		ns1:credentialtheft ,
+		ns1:infostealermalware ,
+		ns1:linuxrootkit .
+ns1:linuxrootkit	rdf:type	ns2:Malware ;
+	rdfs:label	"Linux rootkit" ;
+	ns2:targets	ns1:credentialsandaccesstokens .
+ns1:livesitevalidation	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"live-site validation" .
+<https://www.bleepingcomputer.com/news/security/xbow-tests-anthropics-mythos-preview-for-offensive-security/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 12:16:38 -0400" ;
+	ns2:mentions	ns1:exploitdiscovery ,
+		ns1:livesitevalidation ,
+		ns1:reverseengineering .
+ns1:reverseengineering	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"reverse engineering" .
+ns1:exploitdiscovery	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"exploit discovery" .
+ns1:xbow	ns2:observes	ns1:reverseengineering ,
+		ns1:livesitevalidation ,
+		ns1:exploitdiscovery .
+ns1:opensourceprojects	ns2:propagated_via	ns1:githubrepositories .
+ns1:supplychaincompromise	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"supply chain compromise" .
+<https://thehackernews.com/2026/06/microsoft-restores-some-github-repos.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 22:04:52 +0530" ;
+	ns2:mentions	ns1:supplychaincompromise ,
+		ns1:informationstealer ,
+		ns1:codeinjection .
+ns1:informationstealer	rdf:type	ns2:Malware ;
+	rdfs:label	"information stealer" ;
+	ns2:targets	ns1:opensourceprojects .
+ns1:codeinjection	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"code injection" .
+ns1:crosssitescriptingxss	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cross-site scripting (XSS)" .
+ns1:exchangeservervulnerability	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Exchange Server vulnerability" .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-patches-exchange-server-zero-day-exploited-in-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 09:44:19 -0400" ;
+	ns2:mentions	ns1:crosssitescriptingxss ,
+		ns1:exchangeservervulnerability .
+<https://krebsonsecurity.com/2026/06/who-runs-the-ransomware-group-the-gentlemen/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 14:03:44 +0000" ;
+	ns2:mentions	ns1:ransomware ,
+		ns1:thegentlemen ,
+		ns1:thegentlemenransomware .
+ns1:thegentlemen	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:thegentlemenransomware .
+ns1:The_Gentlemen	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"The Gentlemen" ;
+	owl:sameAs	ns1:thegentlemen .
+ns1:thegentlemenransomware	rdf:type	ns2:Malware ;
+	rdfs:label	"The Gentlemen ransomware" .
+ns1:ransomware	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Ransomware" .
+<https://www.bleepingcomputer.com/news/security/github-announces-npm-security-changes-to-tackle-supply-chain-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 15:41:44 -0400" ;
+	ns2:mentions	ns1:supplychainattacks .
+ns1:supplychainattacks	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"supply-chain attacks" .
+<https://www.bleepingcomputer.com/news/microsoft/windows-11-kb5094126-and-kb5093998-cumulative-updates-released/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 13:32:32 -0400" .
+ns1:patchtuesday	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Patch Tuesday" .
+<https://www.bleepingcomputer.com/news/microsoft/microsoft-june-2026-patch-tuesday-fixes-3-zero-day-200-flaws/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 09 Jun 2026 13:57:59 -0400" ;
+	ns2:mentions	ns1:patchtuesday ,
+		<http://group2.org/cskg/200flaws> ,
+		ns1:threezerodayvulnerabilities .
+<http://group2.org/cskg/200flaws>	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"200 flaws" .
+ns1:threezerodayvulnerabilities	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"three zero-day vulnerabilities" .
+<https://www.bleepingcomputer.com/news/security/the-miasma-worm-source-code-briefly-leaked-on-github/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 16:27:08 -0400" ;
+	ns2:mentions	ns1:credentialstealing ,
+		ns1:miasma ,
+		ns1:github ,
+		ns1:supplychainattacks .
+ns1:credentialstealing	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"credential-stealing" .
+ns1:zerodayexploit	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"zero-day exploit" .
+<https://thehackernews.com/2026/06/microsoft-defender-rogueplanet-zero-day.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 10:52:01 +0530" ;
+	ns2:mentions	ns1:nightmareeclipse ,
+		ns1:chaoticeclipse ,
+		ns1:racecondition ,
+		ns1:rogueplanet ,
+		ns1:zerodayexploit ,
+		ns1:msnightmaregithubaccount .
+ns1:msnightmaregithubaccount	rdf:type	ns2:Indicator ;
+	rdfs:label	"MSNightmare GitHub account" .
+ns1:chaoticeclipse	rdf:type	ns2:ThreatActor ;
+	ns2:uses	ns1:msnightmaregithubaccount ,
+		ns1:greatxml ;
+	ns2:exploits	ns1:rogueplanet ;
+	ns2:reports	ns1:blogger ;
+	ns2:has_similarities_with	ns1:nightmareeclipse .
+ns1:racecondition	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"race condition" .
+ns1:Chaotic_Eclipse	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Chaotic Eclipse" ;
+	owl:sameAs	ns1:chaoticeclipse .
+ns1:rogueplanet	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"RoguePlanet" .
+ns1:nightmareeclipse	rdf:type	ns2:ThreatActor .
+ns1:Nightmare-Eclipse	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Nightmare-Eclipse" ;
+	owl:sameAs	ns1:nightmareeclipse .
+<https://thehackernews.com/2026/06/github-to-disable-npm-install-scripts.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 11:53:03 +0530" ;
+	ns2:mentions	ns1:softwaresupplychainthreats ,
+		ns1:npmlifecyclehooks .
+ns1:npmlifecyclehooks	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"npm lifecycle hooks" ;
+	ns2:uses	ns1:npminstall .
+ns1:softwaresupplychainthreats	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"software supply chain threats" .
+<https://www.bleepingcomputer.com/news/security/cisa-tells-govt-agencies-to-patch-critical-exploited-flaws-in-3-days/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 08:46:44 -0400" .
+ns1:chinesehackers	rdf:type	ns2:ThreatActor .
+ns1:Chinese_hackers	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Chinese hackers" ;
+	owl:sameAs	ns1:chinesehackers .
+ns1:persistence	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"persistence" .
+<https://www.bleepingcomputer.com/news/security/chinese-hackers-hijack-auth-flow-spy-on-isolated-network-for-a-decade/>	rdf:type	ns2:Report ;
+	dcterms:created	"Sat, 13 Jun 2026 10:06:42 -0400" ;
+	ns2:mentions	ns1:chinesehackers ,
+		ns1:persistence .
+ns1:jdybotnet	rdf:type	ns2:Malware ;
+	rdfs:label	"JDY botnet" ;
+	ns2:targets	ns1:sohoandiotdevices ;
+	ns2:attributed_to	ns1:volttyphoon .
+ns1:reconnaissance	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Reconnaissance" ,
+		"reconnaissance" .
+ns1:volttyphoon	rdf:type	ns2:ThreatActor .
+<https://www.bleepingcomputer.com/news/security/china-linked-jdy-botnet-expands-targeting-of-us-military-networks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 11:00:00 -0400" ;
+	ns2:mentions	ns1:jdybotnet ,
+		ns1:reconnaissance ,
+		ns1:volttyphoon .
+ns1:Volt_Typhoon	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"Volt Typhoon" ;
+	owl:sameAs	ns1:volttyphoon .
+<https://thehackernews.com/2026/06/ivanti-fortinet-and-sap-release-patches.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 20:40:59 +0530" ;
+	ns2:mentions	ns1:commandinjection ,
+		ns1:informationdisclosure ,
+		ns5:CVE-2026-25089 ,
+		ns1:arbitrarycodeexecution .
+ns1:cve202625089	ns2:targets	ns1:fortisandbox ,
+		ns1:fortisandboxpaaswebui ,
+		ns1:fortisandboxcloud .
+ns1:fortinet	ns2:patched	ns1:cve202625089 .
+ns5:CVE-2026-25089	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-25089" .
+ns1:arbitrarycodeexecution	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"arbitrary code execution" .
+<https://thehackernews.com/2026/06/unpatched-langflow-flaw-cve-2026-5027.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 10 Jun 2026 20:30:59 +0530" ;
+	ns2:mentions	ns1:pathtraversal ,
+		ns5:CVE-2026-5027 .
+ns1:cve20265027	ns2:aligned_with	ns1:pathtraversal ;
+	ns2:exploits	ns1:langflow .
+ns1:vulncheck	ns2:reports	ns1:cve20265027 .
+ns5:CVE-2026-5027	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-2026-5027" .
+<https://www.bleepingcomputer.com/news/security/max-severity-ivanti-sentry-vulnerability-now-exploited-in-attacks/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 02:20:22 -0400" ;
+	ns2:mentions	ns1:remotecodeexecution ,
+		ns1:ivantisentryflaw .
+ns1:ivantisentryflaw	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"Ivanti Sentry flaw" .
+ns1:oceanlotus	rdf:type	ns2:ThreatActor ;
+	ns2:aligned_with	ns1:vietnam ;
+	ns2:uses	ns1:spectralviper ;
+	ns2:targets	ns1:vietnameseinfrastructureandtransportconstructioncorporation .
+ns1:cyberespionage	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"cyber espionage" .
+ns1:OceanLotus	rdf:type	ns2:ThreatActor ;
+	rdfs:label	"OceanLotus" ;
+	owl:sameAs	ns1:oceanlotus .
+ns1:spectralviper	rdf:type	ns2:Malware ;
+	rdfs:label	"SPECTRALVIPER" .
+<https://thehackernews.com/2026/06/oceanlotus-hits-vietnam-investors-with.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 15:15:58 +0530" ;
+	ns2:mentions	ns1:supplychainattack ,
+		ns1:oceanlotus ,
+		ns1:cyberespionage ,
+		ns1:spectralviper .
+<https://thehackernews.com/2026/06/ai-broke-vulnerability-management-thats.html>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 17:00:00 +0530" .
