@@ -139,32 +139,34 @@ Example `GET /` response from final runtime verification:
   "graph_db_backend": "Virtuoso",
   "sparql_endpoint": "http://virtuoso:8890/sparql",
   "named_graph": "http://group2.org/cskg",
-  "global_triples": 6756,
-  "cskg_named_graph_triples": 1009
+  "global_triples": 6974,
+  "cskg_named_graph_triples": 1227
 }
 ```
+
+`global_triples` may vary depending on the local Virtuoso instance. Final project metrics use the CSKG named graph count.
 
 Example `GET /stats` response from final runtime verification:
 
 ```json
 {
   "named_graph": "http://group2.org/cskg",
-  "total_triples": 1009,
+  "total_triples": 1227,
   "count_by_type": {
-    "http://docs.oasis-open.org/cti/ns/stix#Report": 94,
-    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 85,
-    "http://docs.oasis-open.org/cti/ns/stix#ThreatActor": 60,
-    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 30,
-    "http://docs.oasis-open.org/cti/ns/stix#Malware": 25,
-    "http://docs.oasis-open.org/cti/ns/stix#Indicator": 11
+    "http://docs.oasis-open.org/cti/ns/stix#Report": 117,
+    "http://docs.oasis-open.org/cti/ns/stix#AttackPattern": 95,
+    "http://docs.oasis-open.org/cti/ns/stix#ThreatActor": 70,
+    "http://docs.oasis-open.org/cti/ns/stix#Vulnerability": 46,
+    "http://docs.oasis-open.org/cti/ns/stix#Malware": 30,
+    "http://docs.oasis-open.org/cti/ns/stix#Indicator": 14
   },
-  "total_reports": 94,
-  "total_vulnerabilities": 30,
-  "total_malware": 25,
-  "total_indicators": 11,
-  "total_attack_patterns": 85,
-  "total_threat_actors": 60,
-  "total_sepses_cve_uri": 11
+  "total_reports": 117,
+  "total_vulnerabilities": 46,
+  "total_malware": 30,
+  "total_indicators": 14,
+  "total_attack_patterns": 95,
+  "total_threat_actors": 70,
+  "total_sepses_cve_uri": 22
 }
 ```
 
@@ -261,6 +263,22 @@ GRAPH <http://group2.org/cskg>
 
 It does not intentionally dump Virtuoso internal graphs.
 
+## Automatic Turtle Dump
+
+The Docker Compose pipeline includes a `ttl_dump` service that periodically regenerates `cskg_full_dump.ttl` from the Virtuoso named graph `<http://group2.org/cskg>`.
+
+The latest verified Turtle dump contains:
+
+```text
+TTL triples: 1227
+```
+
+To inspect the dump worker logs:
+
+```bash
+docker logs -f cskg_ttl_dump
+```
+
 ## Final Runtime Verification Snapshot
 
 The latest documented runtime verification is stored in `docs/evidence/final_runtime_verification.md`. Earlier 83-triple evidence is retained as historical evidence in `docs/evidence/runtime_verification.md`.
@@ -269,21 +287,21 @@ Observed final state:
 
 | Metric | Value |
 |---|---:|
-| CSKG named graph triples | 1009 |
-| Reports | 94 |
-| Vulnerabilities | 30 |
-| Malware | 25 |
-| Indicators | 11 |
-| Attack patterns | 85 |
-| Threat actors | 60 |
-| SEPSES CVE URIs | 11 |
+| CSKG named graph triples | 1227 |
+| Reports | 117 |
+| Vulnerabilities | 46 |
+| Malware | 30 |
+| Indicators | 14 |
+| Attack patterns | 95 |
+| Threat actors | 70 |
+| SEPSES CVE URIs | 22 |
 
 The final runtime evidence uses only the CSKG named graph `<http://group2.org/cskg>` for graph-size and entity-count reporting.
 
 ## Known Limitations
 
 - The graph is limited to the collected RSS/API batch.
-- SEPSES linking is strongest for CVE URI mapping; the latest graph has 11 SEPSES CVE URIs.
+- SEPSES linking is strongest for CVE URI mapping; the latest graph has 22 SEPSES CVE URIs.
 - CWE and MITRE ATT&CK URI alignment are not fully implemented yet.
 - Automatic natural-language report generation may still be affected by Gemini quota limits.
 - Docker Compose was not detected during earlier verification, but it is available now and the project can be run cleanly with `docker compose -f compose.yml up --build -d`.

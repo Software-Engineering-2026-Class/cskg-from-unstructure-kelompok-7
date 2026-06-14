@@ -55,13 +55,13 @@ Expected output is a table of metrics such as:
 
 | metric | value |
 |---|---:|
-| `total_triples` | 1009 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 85 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 94 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor` | 60 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 30 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Malware` | 25 |
-| `type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator` | 11 |
+| `total_triples` | 1227 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern` | 95 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Report` | 117 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor` | 70 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability` | 46 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Malware` | 30 |
+| `type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator` | 14 |
 
 Final runtime validation on 2026-06-02 returned 7 rows from the named graph. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
@@ -122,7 +122,7 @@ Example expected row shape:
 |---|---|---|
 | `https://w3id.org/sepses/resource/cve/CVE-2025-52691` | `CVE-2025-52691` | FortiGuard SmarterMail RCE report URI |
 
-Final runtime validation on 2026-06-02 returned 13 rows and 11 unique SEPSES-linked CVE URIs from the named graph. The current result includes CVEs such as `CVE-2025-34291`, `CVE-2025-52691`, `CVE-2026-0257`, `CVE-2026-20223`, and `CVE-2026-9082`. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+Final runtime validation on 2026-06-02 returned 24 rows and 22 unique SEPSES-linked CVE URIs from the named graph. The current result includes CVEs such as `CVE-1999-0082`, `CVE-1999-0095`, `CVE-2023-38035`, `CVE-2023-38036`, and `CVE-2024-38063`. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
 ### Current Limitation
 
@@ -193,7 +193,7 @@ Example expected row shape:
 |---|---|---|---|---|---|
 | `cskg:supplychainattack` | `stix:AttackPattern` | `Supply chain attack` | `stix:targets` | `cskg:packagist` | Packagist supply-chain report URI |
 
-Final runtime validation on 2026-06-02 returned 241 rows from the named graph, covering 85 attack pattern entities, 25 malware entities, and relationship/report context where available. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
+Final runtime validation on 2026-06-02 returned 240 rows from the named graph, covering 95 attack pattern entities, 30 malware entities, and relationship/report context where available. Full evidence is stored in `docs/evidence/usecase_runtime_outputs.md`.
 
 ### Current Limitation
 

@@ -214,7 +214,7 @@ cskg:konni
     a stix:Vulnerability .
 ```
 
-**Current status:** CVE URI linking is implemented and verified (11 SEPSES CVE URIs confirmed in final runtime statistics). Linking for CWE IDs and MITRE ATT&CK technique URIs is planned for future iterations.
+**Current status:** CVE URI linking is implemented and verified (22 SEPSES CVE URIs confirmed in final runtime statistics). Linking for CWE IDs and MITRE ATT&CK technique URIs is planned for future iterations.
 
 ---
 

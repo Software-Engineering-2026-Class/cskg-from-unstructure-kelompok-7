@@ -27,22 +27,22 @@ The frozen final runtime evidence reports:
 
 | Metric | Value |
 |---|---:|
-| CSKG named graph triples | 1009 |
-| Reports | 94 |
-| Vulnerabilities | 30 |
-| Malware | 25 |
-| Indicators | 11 |
-| Attack patterns | 85 |
-| Threat actors | 60 |
-| SEPSES CVE URIs | 11 |
+| CSKG named graph triples | 1227 |
+| Reports | 117 |
+| Vulnerabilities | 46 |
+| Malware | 30 |
+| Indicators | 14 |
+| Attack patterns | 95 |
+| Threat actors | 70 |
+| SEPSES CVE URIs | 22 |
 
 The final use-case row counts are:
 
 | Use case | Rows |
 |---|---:|
 | KG statistics and coverage | 7 |
-| Vulnerability linking to SEPSES CVE | 13 |
-| Attack pattern and malware context | 241 |
+| Vulnerability linking to SEPSES CVE | 24 |
+| Attack pattern and malware context | 240 |
 
 ## Remaining Future Work
 

@@ -176,7 +176,8 @@ ns1:attackers	rdf:type	ns2:ThreatActor ;
 		ns1:cve20265027 ,
 		ns1:cve20260257 ,
 		ns1:unauthenticatedaccessflaw ,
-		ns1:cve20263055 .
+		ns1:cve20263055 ,
+		ns1:cve19990095 .
 ns1:remotecodeexecution	rdf:type	ns2:AttackPattern ;
 	rdfs:label	"remote code execution" ,
 		"Remote Code Execution" .
@@ -301,7 +302,8 @@ ns1:bankingmalware	rdf:type	ns2:Malware ;
 	rdfs:label	"banking malware" ;
 	ns2:propagated_via	ns1:piratestreamingapps .
 ns1:impersonation	rdf:type	ns2:AttackPattern ;
-	rdfs:label	"impersonation" .
+	rdfs:label	"impersonation" ,
+		"Impersonation" .
 ns1:lookalikefifadomains	rdf:type	ns2:Indicator ;
 	rdfs:label	"lookalike FIFA domains" ;
 	ns2:impersonates	ns1:fifa .
@@ -717,6 +719,26 @@ ns1:unauthenticateduser	ns2:exploits	ns1:cve202620253 .
 ns1:splunk	ns2:patched	ns1:cve202620253 .
 ns5:CVE-2026-20253	rdf:type	ns2:Vulnerability ;
 	rdfs:label	"CVE-2026-20253" .
+<https://isc.sans.edu/diary/rss/33070>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 02:25:21 GMT" .
+@prefix ns8:	<https://nvd.nist.gov/vuln/detail/> .
+ns8:CVE-1999-0095	rdf:type	ns2:Report ;
+	dcterms:created	"1988-10-01T04:00:00.000" ;
+	ns2:mentions	ns1:executecommandsasroot ,
+		ns5:CVE-1999-0095 .
+ns5:CVE-1999-0095	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-1999-0095" .
+ns1:executecommandsasroot	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"execute commands as root" .
+ns8:CVE-1999-0082	rdf:type	ns2:Report ;
+	dcterms:created	"1988-11-11T05:00:00.000" ;
+	ns2:mentions	ns5:CVE-1999-0082 ,
+		ns1:cwdrootcommand .
+ns5:CVE-1999-0082	rdf:type	ns2:Vulnerability ;
+	rdfs:label	"CVE-1999-0082" .
+ns1:cwdrootcommand	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"CWD ~root command" ;
+	ns2:exploits	ns1:cve19990082 .
 <https://www.bleepingcomputer.com/news/microsoft/hands-on-with-intelligent-terminal-an-ai-powered-windows-terminal/>	rdf:type	ns2:Report ;
 	dcterms:created	"Sun, 07 Jun 2026 19:20:02 -0400" .
 <https://thehackernews.com/2026/06/litellm-flaw-cve-2026-42271-exploited.html>	rdf:type	ns2:Report ;
@@ -927,6 +949,7 @@ ns1:activeexploitation	rdf:type	ns2:AttackPattern ;
 ns1:sqlinjection	rdf:type	ns2:Vulnerability ;
 	rdfs:label	"SQL injection" ;
 	ns2:targets	ns1:langgraph .
+ns1:langgraph	ns2:uses	ns1:checkpointers .
 <https://thehackernews.com/2026/06/interpol-takes-down-sniper-dz-phishing.html>	rdf:type	ns2:Report ;
 	dcterms:created	"Fri, 12 Jun 2026 14:22:55 +0530" ;
 	ns2:mentions	ns1:guedz ,
@@ -1161,3 +1184,53 @@ ns1:spectralviper	rdf:type	ns2:Malware ;
 		ns1:spectralviper .
 <https://thehackernews.com/2026/06/ai-broke-vulnerability-management-thats.html>	rdf:type	ns2:Report ;
 	dcterms:created	"Thu, 11 Jun 2026 17:00:00 +0530" .
+ns1:argamalrat	rdf:type	ns2:Malware ;
+	rdfs:label	"Argamal RAT" ;
+	ns2:propagated_via	ns1:infectedhentaigames .
+<https://securelist.com/argamal-rat-distributed-with-hentai-games/119999/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 03 Jun 2026 09:00:22 +0000" ;
+	ns2:mentions	ns1:infectedhentaigames ,
+		ns1:argamalrat .
+ns1:kaspersky	ns2:observes	ns1:argamalrat .
+ns1:infectedhentaigames	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Infected hentai games" .
+ns1:monterrey	rdf:type	ns2:Indicator ;
+	rdfs:label	"Monterrey" .
+<https://securelist.com/wardriving-assessment-in-mexico-fifa-world-cup-2026/119996/>	rdf:type	ns2:Report ;
+	dcterms:created	"Tue, 02 Jun 2026 12:00:33 +0000" ;
+	ns2:mentions	ns1:mexicocity ,
+		ns1:guadalajara ,
+		ns1:monterrey ,
+		ns1:wardriving .
+ns1:wardriving	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"wardriving" ;
+	ns2:located_in	ns1:monterrey ,
+		ns1:mexicocity ,
+		ns1:guadalajara .
+ns1:mexicocity	rdf:type	ns2:Indicator ;
+	rdfs:label	"Mexico City" .
+ns1:guadalajara	rdf:type	ns2:Indicator ;
+	rdfs:label	"Guadalajara" .
+ns1:kasperskygreat	ns2:observes	ns1:wardriving .
+ns1:sqli	rdf:type	ns2:AttackPattern ,
+		ns2:Vulnerability ;
+	rdfs:label	"SQLi" ;
+	ns2:exploits	ns1:langgraph .
+<https://research.checkpoint.com/2026/from-sqli-to-rce-exploiting-langgraphs-checkpointer/>	rdf:type	ns2:Report ;
+	dcterms:created	"Thu, 11 Jun 2026 13:37:11 +0000" ;
+	ns2:mentions	ns1:rce ,
+		ns1:sqli .
+ns1:rce	rdf:type	ns2:Vulnerability ,
+		ns2:AttackPattern ;
+	rdfs:label	"RCE" ;
+	ns2:exploits	ns1:langgraph .
+<https://research.checkpoint.com/2026/impersonation-click-hijacking-and-tds-inside-a-malware-distribution-ecosystem/>	rdf:type	ns2:Report ;
+	dcterms:created	"Wed, 03 Jun 2026 13:21:44 +0000" ;
+	ns2:mentions	ns1:clickhijacking ,
+		ns1:impersonation .
+ns1:clickhijacking	rdf:type	ns2:AttackPattern ;
+	rdfs:label	"Click Hijacking" .
+ns1:malwaredistributionecosystem	ns2:uses	ns1:impersonation ,
+		ns1:clickhijacking .
+<https://isc.sans.edu/diary/rss/33074>	rdf:type	ns2:Report ;
+	dcterms:created	"Fri, 12 Jun 2026 12:30:10 GMT" .

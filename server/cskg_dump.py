@@ -1,17 +1,20 @@
+import os
+
 import requests
 
-# This script assumes you are running it from the host machine
-# and Virtuoso is exposed on port 8890 (as per your compose.yml)
-VIRTUOSO_ENDPOINT = "http://localhost:8890/sparql"
-GRAPH_URI = "http://group2.org/cskg"
-OUTPUT_FILE = "cskg_full_dump.ttl"
+VIRTUOSO_ENDPOINT = os.getenv("VIRTUOSO_ENDPOINT", "http://localhost:8890/sparql")
+GRAPH_URI = os.getenv("GRAPH_URI", "http://group2.org/cskg")
+OUTPUT_FILE = os.getenv("OUTPUT_FILE", "cskg_full_dump.ttl")
 
 
 def dump_ttl():
     print(f"Connecting to {VIRTUOSO_ENDPOINT}...")
     print(f"Dumping named graph <{GRAPH_URI}> only...")
 
-    query = f"CONSTRUCT {{ ?s ?p ?o }} WHERE {{ GRAPH <{GRAPH_URI}> {{ ?s ?p ?o }} }}"
+    query = f"""
+CONSTRUCT {{ ?s ?p ?o }}
+WHERE {{ GRAPH <{GRAPH_URI}> {{ ?s ?p ?o }} }}
+"""
 
     params = {
         "query": query,

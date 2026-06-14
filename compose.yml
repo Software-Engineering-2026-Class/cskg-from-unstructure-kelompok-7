@@ -126,6 +126,33 @@ services:
     volumes:
       - ./reports:/app/reports
 
+  ttl_dump:
+    build: .
+    container_name: cskg_ttl_dump
+    command: >
+      sh -c "echo 'TTL dump worker starting...' &&
+             while true; do
+               echo 'Dumping CSKG named graph to cskg_full_dump.ttl...';
+               python server/cskg_dump.py;
+               echo 'Validating Turtle dump...';
+               python -c \"from rdflib import Graph; g=Graph(); g.parse('/app/cskg_full_dump.ttl', format='turtle'); print('TTL triples:', len(g))\";
+               echo 'TTL dump finished. Sleeping for 30 minutes...';
+               sleep 1800;
+             done"
+    environment:
+      - PYTHONPATH=/app
+      - VIRTUOSO_ENDPOINT=http://virtuoso:8890/sparql
+      - GRAPH_URI=http://group2.org/cskg
+      - OUTPUT_FILE=/app/cskg_full_dump.ttl
+    volumes:
+      - ./cskg_full_dump.ttl:/app/cskg_full_dump.ttl
+    depends_on:
+      virtuoso:
+        condition: service_healthy
+      graph_builder:
+        condition: service_started
+    restart: always
+
 volumes:
   # This is the persistent data volume for Virtuoso
   virtuoso_db:

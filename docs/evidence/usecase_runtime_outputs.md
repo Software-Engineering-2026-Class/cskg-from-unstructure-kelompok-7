@@ -16,13 +16,13 @@ Query file:
 Runtime result:
 - Rows returned: 7
 - Key findings:
-  - total triples: 1009
-  - reports: 94
-  - threat actors: 60
-  - vulnerabilities: 30
-  - malware: 25
-  - indicators: 11
-  - attack patterns: 85
+  - total triples: 1227
+  - reports: 117
+  - threat actors: 70
+  - vulnerabilities: 46
+  - malware: 30
+  - indicators: 14
+  - attack patterns: 95
 
 Sample output:
 
@@ -32,31 +32,31 @@ Sample output:
   "results": [
     {
       "metric": "total_triples",
-      "value": "1009"
+      "value": "1227"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#AttackPattern",
-      "value": "85"
+      "value": "95"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Indicator",
-      "value": "11"
+      "value": "14"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Malware",
-      "value": "25"
+      "value": "30"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Report",
-      "value": "94"
+      "value": "117"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#ThreatActor",
-      "value": "60"
+      "value": "70"
     },
     {
       "metric": "type_count:http://docs.oasis-open.org/cti/ns/stix#Vulnerability",
-      "value": "30"
+      "value": "46"
     }
   ]
 }
@@ -71,24 +71,35 @@ Query file:
 `queries/usecases/usecase_2_vulnerability_sepses_linking.rq`
 
 Runtime result:
-- Rows returned: 13
+- Rows returned: 24
 - Key findings:
-  - SEPSES-linked CVE result rows: 13
-  - Unique SEPSES-linked CVE URIs: 11
-  - `CVE-2026-0257` and `CVE-2026-9082` appear in multiple source reports.
+  - SEPSES-linked CVE result rows: 24
+  - Unique SEPSES-linked CVE URIs: 22
+  - `CVE-2024-38063` and `CVE-2024-38106` appear in multiple source reports.
 
 SEPSES-linked CVE URI(s):
-- `https://w3id.org/sepses/resource/cve/CVE-2025-34291`
-- `https://w3id.org/sepses/resource/cve/CVE-2025-52691`
+- `https://w3id.org/sepses/resource/cve/CVE-1999-0082`
+- `https://w3id.org/sepses/resource/cve/CVE-1999-0095`
+- `https://w3id.org/sepses/resource/cve/CVE-2023-38035`
+- `https://w3id.org/sepses/resource/cve/CVE-2023-38036`
+- `https://w3id.org/sepses/resource/cve/CVE-2024-38063`
+- `https://w3id.org/sepses/resource/cve/CVE-2024-38106`
+- `https://w3id.org/sepses/resource/cve/CVE-2024-38107`
+- `https://w3id.org/sepses/resource/cve/CVE-2025-8088`
 - `https://w3id.org/sepses/resource/cve/CVE-2026-0257`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-20223`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-26980`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-30844`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-31260`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-41091`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-46333`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-48172`
-- `https://w3id.org/sepses/resource/cve/CVE-2026-9082`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-20230`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-20245`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-20253`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-23111`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-25089`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-28318`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-3055`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-3300`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-35273`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-42271`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-44963`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-45247`
+- `https://w3id.org/sepses/resource/cve/CVE-2026-5027`
 
 Sample output:
 
@@ -97,34 +108,29 @@ Sample output:
   "variables": ["cve", "label", "report"],
   "results": [
     {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2025-34291",
-      "label": "CVE-2025-34291",
-      "report": "https://thehackernews.com/2026/05/cisa-adds-exploited-langflow-and-trend.html"
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-1999-0082",
+      "label": "CVE-1999-0082",
+      "report": "https://nvd.nist.gov/vuln/detail/CVE-1999-0082"
     },
     {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2025-52691",
-      "label": "CVE-2025-52691",
-      "report": "https://fortiguard.fortinet.com/outbreak-alert/smartertools-smartermail-rce"
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-1999-0095",
+      "label": "CVE-1999-0095",
+      "report": "https://nvd.nist.gov/vuln/detail/CVE-1999-0095"
     },
     {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-0257",
-      "label": "CVE-2026-0257",
-      "report": "https://thehackernews.com/2026/05/pan-os-globalprotect-authentication.html"
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-2023-38035",
+      "label": "CVE-2023-38035",
+      "report": "https://www.bleepingcomputer.com/news/security/new-max-severity-ivanti-sentry-flaw-allows-code-execution-as-root/"
     },
     {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-20223",
-      "label": "CVE-2026-20223",
-      "report": "https://thehackernews.com/2026/05/cisco-patches-cvss-100-secure-workload.html"
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-2023-38036",
+      "label": "CVE-2023-38036",
+      "report": "https://www.bleepingcomputer.com/news/security/new-max-severity-ivanti-sentry-flaw-allows-code-execution-as-root/"
     },
     {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-26980",
-      "label": "CVE-2026-26980",
-      "report": "https://www.bleepingcomputer.com/news/security/ghost-cms-sql-injection-flaw-exploited-in-large-scale-clickfix-campaign/"
-    },
-    {
-      "cve": "https://w3id.org/sepses/resource/cve/CVE-2026-41091",
-      "label": "CVE-2026-41091",
-      "report": "https://thehackernews.com/2026/05/microsoft-warns-of-two-actively.html"
+      "cve": "https://w3id.org/sepses/resource/cve/CVE-2024-38063",
+      "label": "CVE-2024-38063",
+      "report": "https://www.bleepingcomputer.com/news/microsoft/microsoft-patches-yellowkey-greenplasma-miniplasma-zero-days/"
     }
   ]
 }
@@ -139,11 +145,11 @@ Query file:
 `queries/usecases/usecase_3_attack_pattern_malware_context.rq`
 
 Runtime result:
-- Rows returned: 241
+- Rows returned: 240
 - Key findings:
-  - attack pattern entities found: 85
-  - malware entities found: 25
-  - examples include `AI-generated lures`, `Supply chain attack`, and related entities such as `cryptocurrencykiosks` and `packagist`.
+  - attack pattern entities found: 95
+  - malware entities found: 30
+  - examples include `AI-driven attacks`, `Authentication bypass`, and related report context.
 
 Sample output:
 
@@ -160,13 +166,13 @@ Sample output:
   ],
   "results": [
     {
-      "entity": "http://group2.org/cskg/aigeneratedlures",
+      "entity": "http://group2.org/cskg/aidrivenattacks",
       "entity_type": "http://docs.oasis-open.org/cti/ns/stix#AttackPattern",
-      "label": "AI-generated lures",
+      "label": "AI-driven attacks",
       "relationship": null,
       "related_entity": null,
       "related_label": null,
-      "report": "https://www.bleepingcomputer.com/news/security/greyvibe-hackers-use-chatgpt-gemini-to-power-cyberattacks/"
+      "report": "https://www.bleepingcomputer.com/news/security/why-ai-driven-threats-are-exposing-the-limits-of-msp-security-stacks/"
     },
     {
       "entity": "http://group2.org/cskg/supplychainattack",
